@@ -47,12 +47,6 @@ const SIDEBAR_ADMIN = [
         icon: <CiBookmark />
     },
     {
-        key: "dashboard",
-        label: "Dashboard",
-        href: "/admin/dashboard",
-        icon: <CiGrid41 />
-    },
-    {
         key: "transaction",
         label: "Transaction",
         href: "/admin/transaction",
