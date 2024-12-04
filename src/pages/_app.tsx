@@ -32,7 +32,6 @@ export default function App({
       <QueryClientProvider client={queryClient}>
         <NextUIProvider>
           <main className={cn(
-            "flex min-h-screen min-w-full items-center justify-center gap-10",
             inter.className,
           )}>
             <Toaster position="top-right" richColors />
