@@ -38,7 +38,7 @@ const Activation = (props: PropTypes) => {
                         size="sm"
                         color="danger"
                         className="mt-4"
-                        onClick={() => router.push("/")}
+                        onPress={() => router.push("/")}
                     >
                         Back to Home
                     </Button>

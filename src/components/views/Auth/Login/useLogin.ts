@@ -42,7 +42,7 @@ const useLogin = () => {
         })
 
         if (result?.error && result.status === 401) {
-            throw new Error("Your credentials is invalid")
+            throw new Error("Your credentials are incorrect")
         }
     }
 

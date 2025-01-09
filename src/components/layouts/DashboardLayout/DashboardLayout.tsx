@@ -29,7 +29,7 @@ const DashboardLayout = (props: PropTypes) => {
                         shouldHideOnScroll
                         className="flex items-center justify-between bg-transparent px-0"
                         classNames={{
-                            wrapper: "p-0"
+                            wrapper: "p-0",
                         }}
                         isBlurred={false}
                         position="static"

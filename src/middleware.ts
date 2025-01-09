@@ -34,19 +34,19 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    if (pathname.startsWith("/member")) {
+    if (pathname.startsWith("/user")) {
         if (!token) {
             const url = new URL("/auth/login", request.url)
             url.searchParams.set("callbackUrl", encodeURI(request.url))
             return NextResponse.redirect(url)
         }
 
-        if (pathname === "/member") {
-            return NextResponse.redirect(new URL("/member/dashboard", request.url))
+        if (pathname === "/user") {
+            return NextResponse.redirect(new URL("/user/dashboard", request.url))
         }
     }
 }
 
 export const config = {
-    matcher: ["/auth/:path*", "/admin/:path*", "/member/:path*"]
+    matcher: ["/auth/:path*", "/admin/:path*", "/user/:path*"]
 }
