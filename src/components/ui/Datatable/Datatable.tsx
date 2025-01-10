@@ -30,7 +30,7 @@ interface PropTypes {
   onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
   onClearSearch: () => void;
   onClickButtonTopContent?: () => void;
-  totalPage: number;
+  totalPages: number;
   renderCell: (item: Record<string, unknown>, columnKey: Key) => ReactNode;
 }
 
@@ -48,7 +48,7 @@ export default function Datatable(props: PropTypes) {
     onChangeSearch,
     onClearSearch,
     onClickButtonTopContent,
-    totalPage,
+    totalPages,
     renderCell,
   } = props;
 
@@ -79,7 +79,7 @@ export default function Datatable(props: PropTypes) {
 
   const BottomContent = useMemo(() => {
     return (
-      <div className="flex items-center justify-center px-2 py-2 lg:justify-between">
+      <div className="flex items-center justify-center lg:justify-between">
         <Select
           className="hidden max-w-36 lg:block"
           size="md"
@@ -87,6 +87,7 @@ export default function Datatable(props: PropTypes) {
           selectionMode="single"
           onChange={onChangeLimit}
           startContent={<p className="text-sm">Show: </p>}
+          disallowEmptySelection
         >
           {LIMIT_LISTS.map((item) => (
             <SelectItem key={item.value} value={item.value}>
@@ -95,20 +96,24 @@ export default function Datatable(props: PropTypes) {
           ))}
         </Select>
 
-        <Pagination
-          isCompact
-          showControls
-          color="danger"
-          page={currentPage}
-          total={totalPage}
-          onChange={onChangePage}
-        />
+        {totalPages > 1 && (
+          <Pagination
+            isCompact
+            showControls
+            color="danger"
+            page={currentPage}
+            total={totalPages}
+            onChange={onChangePage}
+            loop
+          />
+        )}
       </div>
     );
-  }, [currentPage, limit, onChangeLimit, onChangePage, totalPage]);
+  }, [currentPage, limit, onChangeLimit, onChangePage, totalPages]);
 
   return (
     <Table
+      aria-label="Category Table"
       bottomContent={BottomContent}
       bottomContentPlacement="outside"
       classNames={{

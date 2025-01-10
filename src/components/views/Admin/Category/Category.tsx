@@ -6,24 +6,45 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { Key, ReactNode, useCallback } from "react";
+import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constant";
-import { LIMIT_LISTS } from "@/constants/list.constants";
+import useCategory from "./useCategory";
+import InputFile from "@/components/ui/InputFile";
 
 export default function Category() {
-  const { push } = useRouter();
+  const { push, isReady, query } = useRouter();
+  const {
+    dataCategory,
+    isLoadingCategory,
+    isRefetchingCategory,
+
+    setURL,
+    currentPage,
+    currentLimit,
+    currentSearch,
+    handleChangeLimit,
+    handleChangePage,
+    handleSearch,
+    handleClearSearch,
+  } = useCategory();
+
+  useEffect(() => {
+    if (isReady) {
+      setURL();
+    }
+  }, [isReady]);
+
   const renderCell = useCallback(
     (category: Record<string, unknown>, columnKey: Key) => {
       const cellValue = category[columnKey as keyof typeof category];
 
       switch (columnKey) {
-        case "icon":
-          return (
-            <Image src={`${cellValue}`} alt="icon" width={100} height={200} />
-          );
+        // case "icon":
+        //   return (
+        //     <Image src={`${cellValue}`} alt="icon" width={100} height={200} />
+        //   );
         case "actions":
           return (
             <Dropdown>
@@ -53,34 +74,25 @@ export default function Category() {
   );
   return (
     <section>
-      <Datatable
-        buttonTopContentLabel="Create Category"
-        columns={COLUMN_LISTS_CATEGORY}
-        currentPage={1}
-        data={[
-          {
-            _id: "12345",
-            name: "Kategori 1",
-            description: "Deskripsi kategori 1",
-            icon: "/images/general/logo.png",
-          },
-          {
-            _id: "12346",
-            name: "Kategori 2",
-            description: "Deskripsi kategori 3",
-            icon: "/images/general/logo.png",
-          },
-        ]}
-        emptyContent="Categori is Empty"
-        limit={LIMIT_LISTS[0].label}
-        onChangeLimit={() => {}}
-        onChangePage={() => {}}
-        onChangeSearch={() => {}}
-        onClearSearch={() => {}}
-        onClickButtonTopContent={() => {}}
-        renderCell={renderCell}
-        totalPage={2}
-      />
+      {Object.keys(query).length > 0 && (
+        <Datatable
+          buttonTopContentLabel="Create Category"
+          columns={COLUMN_LISTS_CATEGORY}
+          currentPage={Number(currentPage)}
+          data={dataCategory?.data.data || []}
+          emptyContent="Categori is Empty"
+          isLoading={isLoadingCategory || isRefetchingCategory}
+          limit={String(currentLimit)}
+          onChangeLimit={handleChangeLimit}
+          onChangePage={handleChangePage}
+          onChangeSearch={handleSearch}
+          onClearSearch={handleClearSearch}
+          onClickButtonTopContent={() => {}}
+          renderCell={renderCell}
+          totalPages={dataCategory?.data.pagination.totalPages}
+        />
+      )}
+      <InputFile name="input" isDropable={true} />
     </section>
   );
 }

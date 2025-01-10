@@ -38,7 +38,6 @@ const DashboardLayoutSidebar = (props: PropTypes) => {
             priority
             width={120}
             height={40}
-            objectFit="cover"
             className="mb-6"
             onClick={() => router.push("/")}
           />
@@ -57,7 +56,7 @@ const DashboardLayoutSidebar = (props: PropTypes) => {
                 ),
               })}
               startContent={item.icon}
-              textValue={item.label}
+              textValue={item.label}  
               aria-labelledby={item.label}
               aria-describedby={item.label}
               as={Link}
