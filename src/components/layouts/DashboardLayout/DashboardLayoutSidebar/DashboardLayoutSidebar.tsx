@@ -2,14 +2,16 @@ import { cn } from "@/utils/cn";
 import { Button, Listbox, ListboxItem } from "@nextui-org/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
+import { JSX } from "react/jsx-runtime";
 
 interface SidebarItemProps {
   key: string;
   label: string;
   href: string;
-  icon: React.ReactNode;
+  icon: JSX.Element;
 }
 
 interface PropTypes {
@@ -58,6 +60,8 @@ const DashboardLayoutSidebar = (props: PropTypes) => {
               textValue={item.label}
               aria-labelledby={item.label}
               aria-describedby={item.label}
+              as={Link}
+              href={item.href}
             >
               <p className="text-sm font-medium">{item.label}</p>
             </ListboxItem>
