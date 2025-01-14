@@ -13,6 +13,8 @@ import { CiMenuKebab } from "react-icons/ci";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constant";
 import useCategory from "./useCategory";
 import AddCategoryModal from "./AddCategoryModal";
+import DeleteCategoryModal from "./DeleteCategoryModal";
+import Image from "next/image";
 
 export default function Category() {
   const { push, isReady, query } = useRouter();
@@ -30,9 +32,13 @@ export default function Category() {
     handleChangePage,
     handleSearch,
     handleClearSearch,
+
+    selectedId,
+    setSelectedId,
   } = useCategory();
 
   const addCategoryModal = useDisclosure();
+  const deleteCategoryModal = useDisclosure();
 
   useEffect(() => {
     if (isReady) {
@@ -45,6 +51,10 @@ export default function Category() {
       const cellValue = category[columnKey as keyof typeof category];
 
       switch (columnKey) {
+        case "icon":
+          return (
+            <Image src={`${cellValue}`} alt="icon" width={100} height={100} />
+          );
         case "actions":
           return (
             <Dropdown>
@@ -60,7 +70,14 @@ export default function Category() {
                 >
                   Detail
                 </DropdownItem>
-                <DropdownItem key="delete-category" className="text-danger-500">
+                <DropdownItem
+                  key="delete-category"
+                  className="text-danger-500"
+                  onPress={() => {
+                    setSelectedId(`${category._id}`);
+                    deleteCategoryModal.onOpen();
+                  }}
+                >
                   Delete
                 </DropdownItem>
               </DropdownMenu>
@@ -94,6 +111,12 @@ export default function Category() {
       )}
       <AddCategoryModal
         {...addCategoryModal}
+        refectCategory={refetchCategory}
+      />
+      <DeleteCategoryModal
+        {...deleteCategoryModal}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
         refectCategory={refetchCategory}
       />
     </section>
