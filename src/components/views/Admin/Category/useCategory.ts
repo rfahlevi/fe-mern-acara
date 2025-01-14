@@ -92,6 +92,7 @@ const useCategory = () => {
     dataCategory,
     isLoadingCategory,
     isRefetchingCategory,
+    refetchCategory,
 
     setURL,
     currentLimit,

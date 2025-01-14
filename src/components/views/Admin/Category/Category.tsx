@@ -5,13 +5,14 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  useDisclosure,
 } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constant";
 import useCategory from "./useCategory";
-import InputFile from "@/components/ui/InputFile";
+import AddCategoryModal from "./AddCategoryModal";
 
 export default function Category() {
   const { push, isReady, query } = useRouter();
@@ -19,6 +20,7 @@ export default function Category() {
     dataCategory,
     isLoadingCategory,
     isRefetchingCategory,
+    refetchCategory,
 
     setURL,
     currentPage,
@@ -29,6 +31,8 @@ export default function Category() {
     handleSearch,
     handleClearSearch,
   } = useCategory();
+
+  const addCategoryModal = useDisclosure();
 
   useEffect(() => {
     if (isReady) {
@@ -41,10 +45,6 @@ export default function Category() {
       const cellValue = category[columnKey as keyof typeof category];
 
       switch (columnKey) {
-        // case "icon":
-        //   return (
-        //     <Image src={`${cellValue}`} alt="icon" width={100} height={200} />
-        //   );
         case "actions":
           return (
             <Dropdown>
@@ -87,12 +87,15 @@ export default function Category() {
           onChangePage={handleChangePage}
           onChangeSearch={handleSearch}
           onClearSearch={handleClearSearch}
-          onClickButtonTopContent={() => {}}
+          onClickButtonTopContent={addCategoryModal.onOpen}
           renderCell={renderCell}
           totalPages={dataCategory?.data.pagination.totalPages}
         />
       )}
-      <InputFile name="input" isDropable={true} />
+      <AddCategoryModal
+        {...addCategoryModal}
+        refectCategory={refetchCategory}
+      />
     </section>
   );
 }
