@@ -27,7 +27,7 @@ const DashboardLayout = (props: PropTypes) => {
         <div className="h-screen w-full overflow-y-auto px-4">
           <Navbar
             shouldHideOnScroll
-            className="flex items-center justify-between bg-transparent px-0"
+            className="flex items-center justify-between bg-white px-0"
             classNames={{
               wrapper: "p-0",
             }}

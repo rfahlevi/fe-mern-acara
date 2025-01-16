@@ -14,6 +14,7 @@ import React, { useEffect } from "react";
 import useAddCategoryModal from "./useAddCategoryModal";
 import { Controller } from "react-hook-form";
 import InputFile from "@/components/ui/InputFile";
+import CustomTextArea from "@/components/ui/CustomTextArea";
 
 interface PropTypes {
   isOpen: boolean;
@@ -85,10 +86,11 @@ export default function AddCategoryModal(props: PropTypes) {
                 name="description"
                 control={control}
                 render={({ field }) => (
-                  <Textarea
+                  <CustomTextArea
                     {...field}
                     label="Description"
                     variant="bordered"
+                    labelPlacement="inside"
                     type="text"
                     isInvalid={errors.description !== undefined}
                     errorMessage={errors.description?.message}

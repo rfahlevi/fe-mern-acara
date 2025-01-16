@@ -2,7 +2,14 @@ import { cn } from "@/utils/cn";
 import { Button, Spinner } from "@nextui-org/react";
 import { div } from "framer-motion/client";
 import Image from "next/image";
-import React, { ChangeEvent, useEffect, useId, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  ReactNode,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { CiTrash } from "react-icons/ci";
 import { FaImage } from "react-icons/fa";
 
@@ -13,6 +20,7 @@ interface PropTypes {
   isDeleting?: boolean;
   isInvalid?: boolean;
   isUploading?: boolean;
+  label?: ReactNode;
   name: string;
   onDelete?: () => void;
   onUpload?: (files: FileList) => void;
@@ -27,6 +35,7 @@ export default function InputFile(props: PropTypes) {
     isDropable = false,
     isUploading,
     isInvalid,
+    label,
     name,
     onDelete,
     onUpload,
@@ -74,6 +83,7 @@ export default function InputFile(props: PropTypes) {
 
   return (
     <div>
+      {label}
       <label
         ref={drop}
         htmlFor={`dropzone-file-${dropzoneId}`}
