@@ -16,19 +16,14 @@ import CustomInput from "../CustomInput";
 import { CiSearch } from "react-icons/ci";
 import { LIMIT_LISTS } from "@/constants/list.constants";
 import { cn } from "@/utils/cn";
+import useChangeUrl from "@/hooks/useChangeUrl";
 
 interface PropTypes {
   buttonTopContentLabel?: string;
   columns: Record<string, unknown>[];
-  currentPage: number;
   data: Record<string, unknown>[];
   emptyContent: string;
   isLoading?: boolean;
-  limit: string;
-  onChangeLimit: (e: ChangeEvent<HTMLSelectElement>) => void;
-  onChangePage: (page: number) => void;
-  onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClearSearch: () => void;
   onClickButtonTopContent?: () => void;
   totalPages: number;
   renderCell: (item: Record<string, unknown>, columnKey: Key) => ReactNode;
@@ -38,19 +33,22 @@ export default function Datatable(props: PropTypes) {
   const {
     buttonTopContentLabel,
     columns,
-    currentPage,
     data,
     emptyContent,
     isLoading,
-    limit,
-    onChangeLimit,
-    onChangePage,
-    onChangeSearch,
-    onClearSearch,
     onClickButtonTopContent,
     totalPages,
     renderCell,
   } = props;
+
+  const {
+    currentLimit,
+    currentPage,
+    handleChangeLimit,
+    handleChangePage,
+    handleSearch,
+    handleClearSearch,
+  } = useChangeUrl();
 
   const TopContent = useMemo(() => {
     return (
@@ -60,8 +58,8 @@ export default function Datatable(props: PropTypes) {
           className="w-full sm:max-w-[24%]"
           placeholder="Search by name"
           startContent={<CiSearch />}
-          onClear={onClearSearch}
-          onChange={onChangeSearch}
+          onClear={handleClearSearch}
+          onChange={handleSearch}
         />
         {buttonTopContentLabel && (
           <Button color="danger" onPress={onClickButtonTopContent}>
@@ -72,8 +70,8 @@ export default function Datatable(props: PropTypes) {
     );
   }, [
     buttonTopContentLabel,
-    onChangeSearch,
-    onClearSearch,
+    handleSearch,
+    handleClearSearch,
     onClickButtonTopContent,
   ]);
 
@@ -83,9 +81,9 @@ export default function Datatable(props: PropTypes) {
         <Select
           className="hidden max-w-36 lg:block"
           size="md"
-          selectedKeys={[limit]}
+          selectedKeys={[String(currentLimit)]}
           selectionMode="single"
-          onChange={onChangeLimit}
+          onChange={handleChangeLimit}
           startContent={<p className="text-sm">Show: </p>}
           disallowEmptySelection
         >
@@ -101,15 +99,21 @@ export default function Datatable(props: PropTypes) {
             isCompact
             showControls
             color="danger"
-            page={currentPage}
+            page={Number(currentPage)}
             total={totalPages}
-            onChange={onChangePage}
+            onChange={handleChangePage}
             loop
           />
         )}
       </div>
     );
-  }, [currentPage, limit, onChangeLimit, onChangePage, totalPages]);
+  }, [
+    currentPage,
+    String(currentLimit),
+    handleChangeLimit,
+    handleChangePage,
+    totalPages,
+  ]);
 
   return (
     <Table
