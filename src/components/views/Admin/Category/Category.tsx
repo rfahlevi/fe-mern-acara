@@ -44,7 +44,7 @@ export default function Category() {
         case "actions":
           return (
             <DropdownAction
-              key="category"
+              detailKey="category"
               onPressDetail={() => push(`/admin/categories/${category._id}`)}
               onPressDelete={() => {
                 setSelectedId(`${category._id}`);

@@ -18,7 +18,6 @@ const useEvent = () => {
 
     const res = await eventServices.getEvents(params);
     const data = res;
-
     return data;
   };
 

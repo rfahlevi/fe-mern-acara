@@ -13,9 +13,9 @@ const CustomTextArea = forwardRef(
         classNames={{
           label: ["text-sm"],
           inputWrapper: [
-            "border border-default-200 h-12",
+            "border border-default-200 h-12 shadow-none",
             "data-[hover=true]:border-danger-300",
-            "group-data-[focus=true]:border-danger-500",
+            "group-data-[focus=true]:border-danger-300",
           ],
         }}
       />

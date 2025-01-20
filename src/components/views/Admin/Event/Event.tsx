@@ -7,6 +7,8 @@ import Image from "next/image";
 import Datatable from "@/components/ui/Datatable";
 import { COLUMN_LISTS_EVENT } from "./Event.constant";
 import DropdownAction from "@/components/commons/DropdownAction";
+import AddEventModal from "./AddEventModal";
+import DeleteEventModal from "./DeleteEventModal";
 
 export default function Event() {
   const { push, query, isReady } = useRouter();
@@ -45,7 +47,7 @@ export default function Event() {
               className="aspect-video w-36 rounded-lg object-cover"
             />
           );
-        case "isPublish":
+        case "isPublished":
           return (
             <Chip
               color={cellValue === true ? "success" : "warning"}
@@ -58,10 +60,11 @@ export default function Event() {
         case "actions":
           return (
             <DropdownAction
-              key="event"
+              detailKey="event"
               onPressDetail={() => push(`/admin/events/${event._id}`)}
               onPressDelete={() => {
                 setSelectedId(`${event._id}`);
+                deleteEventModal.onOpen();
               }}
             />
           );
@@ -78,13 +81,20 @@ export default function Event() {
           buttonTopContentLabel="Create Event"
           columns={COLUMN_LISTS_EVENT}
           data={dataEvents?.data.data || []}
-          emptyContent="Categori is Empty"
+          emptyContent="Event is Empty"
           isLoading={isLoadingEvents || isRefetchingEvents}
           onClickButtonTopContent={addEventModal.onOpen}
           renderCell={renderCell}
           totalPages={dataEvents?.data.pagination.totalPages}
         />
       )}
+      <AddEventModal {...addEventModal} refectEvents={refetchEvents} />
+      <DeleteEventModal
+        {...deleteEventModal}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+        refectEvents={refetchEvents}
+      />
     </section>
   );
 }

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const useMediaHandling = () => {
-  const uploadIcon = async (
+  const uploadFile = async (
     file: File,
     callback: (fileUrl: string) => void,
   ) => {
@@ -12,11 +12,11 @@ const useMediaHandling = () => {
 
     const {
       data: {
-        data: { secure_url: icon },
+        data: { secure_url: fileUrl },
       },
     } = await uploadServices.uploadFile(formData);
 
-    callback(icon);
+    callback(fileUrl);
   };
 
   const { mutate: mutateDeleteFile, isPending: isPendingMutateDeleteFile } =
@@ -41,17 +41,45 @@ const useMediaHandling = () => {
       mutationFn: (variables: {
         file: File;
         callback: (fileUrl: string) => void;
-      }) => uploadIcon(variables.file, variables.callback),
+      }) => uploadFile(variables.file, variables.callback),
       onError: (error) => {
         toast.error(error.message);
       },
     });
+
+  const handleUploadFile = (
+    files: FileList,
+    onChange: (files: FileList | undefined) => void,
+    callback: (fileUrl?: string) => void,
+  ) => {
+    if (files.length !== 0) {
+      onChange(files);
+      mutateUploadFile({
+        file: files[0],
+        callback: callback,
+      });
+    }
+  };
+
+  const handleDeleteFile = (
+    fileUrl: string | FileList | undefined,
+    callback: () => void,
+  ) => {
+    if (typeof fileUrl === "string") {
+      mutateDeleteFile({ fileUrl, callback });
+    } else {
+      callback();
+    }
+  };
 
   return {
     mutateUploadFile,
     isPendingMutateUploadFile,
     mutateDeleteFile,
     isPendingMutateDeleteFile,
+
+    handleUploadFile,
+    handleDeleteFile,
   };
 };
 

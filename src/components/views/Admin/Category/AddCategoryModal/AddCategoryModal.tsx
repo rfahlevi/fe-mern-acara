@@ -1,14 +1,12 @@
 import CustomInput from "@/components/ui/CustomInput";
 import {
   Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   Spinner,
-  Textarea,
 } from "@nextui-org/react";
 import React, { useEffect } from "react";
 import useAddCategoryModal from "./useAddCategoryModal";
@@ -65,23 +63,25 @@ export default function AddCategoryModal(props: PropTypes) {
           <ModalHeader>Add Category</ModalHeader>
           <ModalBody>
             <div className="flex flex-col gap-4">
-              <p className="font-semibold">Information</p>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => (
-                  <CustomInput
-                    {...field}
-                    autoFocus
-                    label="Name"
-                    variant="bordered"
-                    labelPlacement="inside"
-                    type="text"
-                    isInvalid={errors.name !== undefined}
-                    errorMessage={errors.name?.message}
-                  />
-                )}
-              />
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold">Information</p>
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomInput
+                      {...field}
+                      autoFocus
+                      label="Name"
+                      variant="bordered"
+                      labelPlacement="inside"
+                      type="text"
+                      isInvalid={errors.name !== undefined}
+                      errorMessage={errors.name?.message}
+                    />
+                  )}
+                />
+              </div>
               <Controller
                 name="description"
                 control={control}
@@ -97,27 +97,29 @@ export default function AddCategoryModal(props: PropTypes) {
                   />
                 )}
               />
-              <p className="text-sm font-bold">Icon</p>
-              <Controller
-                name="icon"
-                control={control}
-                render={({ field: { onChange, value, ...field } }) => (
-                  <InputFile
-                    {...field}
-                    name="icon"
-                    isDropable
-                    onDelete={() => handleDeleteIcon(onChange)}
-                    onUpload={(files: FileList) =>
-                      handleUploadIcon(files, onChange)
-                    }
-                    isUploading={isPendingMutateUploadFile}
-                    isDeleting={isPendingMutateDeleteFile}
-                    isInvalid={errors.icon !== undefined}
-                    errorMessage={errors.icon?.message}
-                    preview={typeof preview === "string" ? preview : ""}
-                  />
-                )}
-              />
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold">Icon</p>
+                <Controller
+                  name="icon"
+                  control={control}
+                  render={({ field: { onChange, value, ...field } }) => (
+                    <InputFile
+                      {...field}
+                      name="icon"
+                      isDropable
+                      onDelete={() => handleDeleteIcon(onChange)}
+                      onUpload={(files: FileList) =>
+                        handleUploadIcon(files, onChange)
+                      }
+                      isUploading={isPendingMutateUploadFile}
+                      isDeleting={isPendingMutateDeleteFile}
+                      isInvalid={errors.icon !== undefined}
+                      errorMessage={errors.icon?.message}
+                      preview={typeof preview === "string" ? preview : ""}
+                    />
+                  )}
+                />
+              </div>
             </div>
           </ModalBody>
           <ModalFooter>
@@ -131,7 +133,10 @@ export default function AddCategoryModal(props: PropTypes) {
             </Button>
             <Button color="danger" type="submit" disabled={disabledSubmit}>
               {isPendingMutateAddCategory ? (
-                <Spinner size="sm" color="white" />
+                <div className="flex gap-2">
+                  <Spinner color="white" size="sm" />
+                  Loading...
+                </div>
               ) : (
                 "Create Category"
               )}

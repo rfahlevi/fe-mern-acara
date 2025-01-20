@@ -9,7 +9,7 @@ import React from "react";
 import { CiMenuKebab } from "react-icons/ci";
 
 interface PropTypes {
-  key: string;
+  detailKey: string;
   onPressDetail: () => {};
   onPressDelete: () => void;
 }
@@ -23,11 +23,14 @@ const DropdownAction = (props: PropTypes) => {
         </Button>
       </DropdownTrigger>
       <DropdownMenu>
-        <DropdownItem key={`detail-${props.key}`} onPress={props.onPressDetail}>
+        <DropdownItem
+          key={`detail-${props.detailKey}`}
+          onPress={props.onPressDetail}
+        >
           Detail
         </DropdownItem>
         <DropdownItem
-          key={`detail-${props.key}`}
+          key={`delete-${props.detailKey}`}
           className="text-danger-500"
           onPress={props.onPressDelete}
         >
