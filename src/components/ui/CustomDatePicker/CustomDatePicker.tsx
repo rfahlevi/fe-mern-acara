@@ -23,4 +23,6 @@ const CustomDatePicker = forwardRef(
   },
 );
 
+CustomDatePicker.displayName = "CustomDatePicker";
+
 export default CustomDatePicker;

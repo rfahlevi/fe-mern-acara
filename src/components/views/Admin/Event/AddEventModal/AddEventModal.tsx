@@ -17,7 +17,6 @@ import { ICategory } from "@/types/Category";
 import CustomAutoComplete from "@/components/ui/CustomAutoComplete";
 import CustomDatePicker from "@/components/ui/CustomDatePicker";
 import { IRegency } from "@/types/Event";
-import { getLocalTimeZone, now } from "@internationalized/date";
 import CustomTextArea from "@/components/ui/CustomTextArea";
 
 interface PropTypes {

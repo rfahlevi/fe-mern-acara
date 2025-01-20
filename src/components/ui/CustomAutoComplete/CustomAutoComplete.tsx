@@ -34,4 +34,6 @@ const CustomAutoComplete = forwardRef<
   );
 });
 
+CustomAutoComplete.displayName = "CustomAutoComplete";
+
 export default CustomAutoComplete;
