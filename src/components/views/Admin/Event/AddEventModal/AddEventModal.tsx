@@ -94,20 +94,6 @@ export default function AddEventModal(props: PropTypes) {
                     />
                   )}
                 />
-                {/* <Controller
-                  name="slug"
-                  control={control}
-                  render={({ field }) => (
-                    <CustomInput
-                      {...field}
-                      label="Slug"
-                      variant="bordered"
-                      labelPlacement="inside"
-                      isInvalid={errors.slug !== undefined}
-                      errorMessage={errors.slug?.message}
-                    />
-                  )}
-                /> */}
                 <Controller
                   name="category"
                   control={control}
@@ -134,14 +120,14 @@ export default function AddEventModal(props: PropTypes) {
                 <Controller
                   name="startDate"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field: { onChange, ...field } }) => (
                     <CustomDatePicker
                       {...field}
                       label="Start Date"
                       variant="bordered"
                       labelPlacement="inside"
                       hideTimeZone
-                      defaultValue={now(getLocalTimeZone())}
+                      onChange={(value) => onChange(value)}
                       showMonthAndYearPickers
                       isInvalid={errors.startDate !== undefined}
                       errorMessage={errors.startDate?.message}
@@ -151,14 +137,14 @@ export default function AddEventModal(props: PropTypes) {
                 <Controller
                   name="endDate"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field: { onChange, ...field } }) => (
                     <CustomDatePicker
                       {...field}
                       label="End Date"
                       variant="bordered"
                       labelPlacement="inside"
                       hideTimeZone
-                      defaultValue={now(getLocalTimeZone())}
+                      onChange={(value) => onChange(value)}
                       showMonthAndYearPickers
                       isInvalid={errors.endDate !== undefined}
                       errorMessage={errors.endDate?.message}
@@ -231,10 +217,10 @@ export default function AddEventModal(props: PropTypes) {
                       errorMessage={errors.isOnline?.message}
                     >
                       <AutocompleteItem key="true" value="true">
-                        Yes
+                        Online
                       </AutocompleteItem>
                       <AutocompleteItem key="false" value="false">
-                        No
+                        Offline
                       </AutocompleteItem>
                     </CustomAutoComplete>
                   )}

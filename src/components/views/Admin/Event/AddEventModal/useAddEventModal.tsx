@@ -17,7 +17,6 @@ import * as yup from "yup";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please input name"),
-  // slug: yup.string().required("Please input slug"),
   category: yup.string().required("Please select category"),
   startDate: yup.mixed<DateValue>().required("Please select start date"),
   endDate: yup.mixed<DateValue>().required("Please select end date"),
@@ -131,15 +130,17 @@ const useAddEventModal = () => {
       isFeatured: data.isFeatured === "true" ? true : false,
       isPublished: data.isPublished === "true" ? true : false,
       isOnline: data.isOnline === "true" ? true : false,
-      startDate: toStandardDate(data.startDate),
-      endDate: toStandardDate(data.endDate),
+      startDate: data.startDate ? toStandardDate(data.startDate) : "",
+      endDate: data.endDate ? toStandardDate(data.endDate) : "",
       location: {
-        region: data.region,
-        coordinates: [Number(data.latitude), Number(data.longitude)],
-        address: data.address,
+        region: `${data.region}`,
+        coordinates: [Number(`${data.latitude}`), Number(`${data.longitude}`)],
+        address: `${data.address}`,
       },
-      banner: data.banner,
+      banner: `${data.banner}`,
     };
+
+    // console.log("Payload", payload);
 
     mutateAddEvent(payload);
   };

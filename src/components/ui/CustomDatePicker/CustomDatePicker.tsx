@@ -6,9 +6,7 @@ const CustomDatePicker = forwardRef(
     return (
       <DatePicker
         {...field}
-        label="Start Date"
         variant="bordered"
-        labelPlacement="inside"
         hideTimeZone
         showMonthAndYearPickers
         radius="sm"

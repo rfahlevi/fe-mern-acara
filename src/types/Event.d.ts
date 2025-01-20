@@ -1,30 +1,31 @@
 import { DateValue } from "@nextui-org/react";
 
 interface IEvent {
-  name: string;
+  _id?: string;
+  name?: string;
   // slug: string;
-  category: string;
-  isFeatured: boolean | string;
-  isPublished: boolean | string;
-  isOnline: boolean | string;
-  description: string;
-  startDate: string;
-  endDate: string;
+  category?: string;
+  isFeatured?: boolean | string;
+  isPublished?: boolean | string;
+  isOnline?: boolean | string;
+  description?: string;
+  startDate?: string;
+  endDate?: string;
   location?: {
-    region: number;
+    region: number | string;
     coordinates: number[];
     address: string;
   };
-  banner: string | FileList;
+  banner?: string | FileList;
 }
 
 interface IEventForm extends IEvent {
-  region: number;
-  startDate: DateValue;
-  endDate: DateValue;
-  latitude: number;
-  longitude: number;
-  address: string;
+  region?: number;
+  startDate?: DateValue;
+  endDate?: DateValue;
+  latitude?: number;
+  longitude?: number;
+  address?: string;
 }
 
 interface IRegency {

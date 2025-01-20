@@ -1,12 +1,8 @@
-import useMediaHandling from "@/hooks/useMediaHandling";
 import categoryServices from "@/services/category.service";
 import { ICategory } from "@/types/Category";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import * as yup from "yup";
 
 const useDetailCategory = () => {
   const { query, isReady } = useRouter();

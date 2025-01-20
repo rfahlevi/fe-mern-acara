@@ -17,9 +17,11 @@ const toStandardDate = (date: DateValue) => {
   const minute = "minute" in date ? date.minute : 0;
   const second = "second" in date ? date.second : 0;
 
-  const result = `${year}-${month}-${day} ${toStandardTime(hour)}:${toStandardTime(minute)}:${toStandardTime(
+  const result = `${year}-${toStandardTime(month)}-${toStandardTime(day)} ${toStandardTime(hour)}:${toStandardTime(minute)}:${toStandardTime(
     second,
   )}`;
+
+  console.log("toStandardDate", result);
   return result;
 };
 
