@@ -6,17 +6,24 @@ import {
   Card,
   CardBody,
   CardHeader,
+  select,
   useDisclosure,
 } from "@nextui-org/react";
-import React, { Key, ReactNode, useCallback } from "react";
+import React, { Key, ReactNode, useCallback, useState } from "react";
 import { COLUMN_LISTS_TICKET } from "./TicketTab.constant";
 import useTicketTab from "./useTicketTab";
 import AddTicketModal from "./AddTicketModal";
+import DeleteTicketModal from "./DeleteTicketModal";
+import { ITicket } from "@/types/Ticket";
 
 export default function TicketTab() {
   const addTicketModal = useDisclosure();
   const deleteTicketModal = useDisclosure();
   const updateTicketModal = useDisclosure();
+
+  const [selectedDataTicket, setSelectedDataTicket] = useState<ITicket | null>(
+    null,
+  );
 
   const { dataTicket, isPendingTicket, isRefetchingTicket, refetchTicket } =
     useTicketTab();
@@ -36,6 +43,7 @@ export default function TicketTab() {
                 updateTicketModal.onOpen();
               }}
               onPressDelete={() => {
+                setSelectedDataTicket(ticket as ITicket);
                 deleteTicketModal.onOpen();
               }}
             />
@@ -75,6 +83,12 @@ export default function TicketTab() {
         </CardBody>
       </Card>
       <AddTicketModal {...addTicketModal} refectTicket={refetchTicket} />
+      <DeleteTicketModal
+        {...deleteTicketModal}
+        refectTicket={refetchTicket}
+        selectedDataTicket={selectedDataTicket}
+        setSelectedDataTicket={setSelectedDataTicket}
+      />
     </>
   );
 }

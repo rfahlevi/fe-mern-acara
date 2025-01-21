@@ -39,6 +39,7 @@ export default function DeleteCategoryModal(props: PropTypes) {
     if (isSuccessMutateDeleteCategory) {
       onClose();
       refectCategory();
+      setSelectedId("");
     }
   }, [isSuccessMutateDeleteCategory]);
 

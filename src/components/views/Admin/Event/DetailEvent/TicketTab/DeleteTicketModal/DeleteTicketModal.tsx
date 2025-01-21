@@ -8,40 +8,41 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
-import useDeleteEventModal from "./useDeleteEventModal";
+import useDeleteTicketModal from "./useDeleteTicketModal";
+import { ITicket } from "@/types/Ticket";
 
 interface PropTypes {
   isOpen: boolean;
   onClose: () => void;
   onOpenChange: () => void;
-  refectEvents: () => void;
-  selectedId: string;
-  setSelectedId: Dispatch<SetStateAction<string>>;
+  refectTicket: () => void;
+  selectedDataTicket: ITicket | null;
+  setSelectedDataTicket: Dispatch<SetStateAction<ITicket | null>>;
 }
 
-export default function DeleteEventModal(props: PropTypes) {
+export default function DeleteTicketModal(props: PropTypes) {
   const {
     isOpen,
     onClose,
     onOpenChange,
-    refectEvents,
-    selectedId,
-    setSelectedId,
+    refectTicket,
+    selectedDataTicket,
+    setSelectedDataTicket,
   } = props;
 
   const {
-    mutateDeleteEvent,
-    isPendingMutateDeleteEvent,
-    isSuccessMutateDeleteEvent,
-  } = useDeleteEventModal();
+    mutateDeleteTicket,
+    isPendingMutateDeleteTicket,
+    isSuccessMutateDeleteTicket,
+  } = useDeleteTicketModal();
 
   useEffect(() => {
-    if (isSuccessMutateDeleteEvent) {
+    if (isSuccessMutateDeleteTicket) {
       onClose();
-      refectEvents();
-      setSelectedId("");
+      refectTicket();
+      setSelectedDataTicket(null);
     }
-  }, [isSuccessMutateDeleteEvent]);
+  }, [isSuccessMutateDeleteTicket]);
 
   return (
     <Modal
@@ -51,9 +52,11 @@ export default function DeleteEventModal(props: PropTypes) {
       scrollBehavior="inside"
     >
       <ModalContent className="m-4">
-        <ModalHeader>Delete Event</ModalHeader>
+        <ModalHeader>Delete Ticket</ModalHeader>
         <ModalBody>
-          <p className="text-medium">Are you sure want to delete this event?</p>
+          <p className="text-medium">
+            Are you sure want to delete this ticket?
+          </p>
         </ModalBody>
         <ModalFooter>
           <Button
@@ -61,7 +64,7 @@ export default function DeleteEventModal(props: PropTypes) {
             variant="flat"
             onPress={() => {
               onClose();
-              setSelectedId("");
+              setSelectedDataTicket(null);
             }}
             disabled
           >
@@ -70,10 +73,10 @@ export default function DeleteEventModal(props: PropTypes) {
           <Button
             color="danger"
             type="submit"
-            disabled={isPendingMutateDeleteEvent}
-            onPress={() => mutateDeleteEvent(selectedId)}
+            disabled={isPendingMutateDeleteTicket}
+            onPress={() => mutateDeleteTicket(`${selectedDataTicket?._id}`)}
           >
-            {isPendingMutateDeleteEvent ? (
+            {isPendingMutateDeleteTicket ? (
               <Spinner size="sm" color="white" />
             ) : (
               "Delete"
