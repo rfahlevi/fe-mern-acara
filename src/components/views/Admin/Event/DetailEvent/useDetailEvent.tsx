@@ -8,23 +8,23 @@ import { toast } from "sonner";
 const useDetailEvent = () => {
   const { query, isReady } = useRouter();
 
-  const getEventById = async (id: string) => {
-    const { data } = await eventServices.getEventById(id);
-
-    return data.data;
-  };
-
-  const getRegencyById = async (id: string) => {
-    const { data } = await eventServices.getRegencyById(id);
+  const getEventById = async () => {
+    const { data } = await eventServices.getEventById(`${query.id}`);
 
     return data.data;
   };
 
   const { data: dataEvent, refetch: refetchEvent } = useQuery({
     queryKey: ["Event"],
-    queryFn: () => getEventById(`${query.id}`),
+    queryFn: getEventById,
     enabled: isReady,
   });
+
+  const getRegencyById = async (id: string) => {
+    const { data } = await eventServices.getRegencyById(id);
+
+    return data.data;
+  };
 
   const { data: dataDefaultRegion, isPending: isPendingDefaultRegion } =
     useQuery({

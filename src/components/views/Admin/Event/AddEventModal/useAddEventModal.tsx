@@ -48,7 +48,7 @@ const useAddEventModal = () => {
     reset,
     watch,
     getValues,
-    setValue,
+    setValue: setValueAddEvent,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -56,11 +56,11 @@ const useAddEventModal = () => {
   const preview = watch("banner");
   const fileUrl = getValues("banner");
 
-  setValue("startDate", now(getLocalTimeZone()));
-  setValue("endDate", now(getLocalTimeZone()));
-  setValue("isPublished", "false");
-  setValue("isFeatured", "false");
-  setValue("isOnline", "false");
+  setValueAddEvent("startDate", now(getLocalTimeZone()));
+  setValueAddEvent("endDate", now(getLocalTimeZone()));
+  setValueAddEvent("isPublished", "false");
+  setValueAddEvent("isFeatured", "false");
+  setValueAddEvent("isOnline", "false");
 
   const handleUploadBanner = (
     files: FileList,
@@ -68,7 +68,7 @@ const useAddEventModal = () => {
   ) => {
     handleUploadFile(files, onChange, (fileUrl: string | undefined) => {
       if (fileUrl) {
-        setValue("banner", fileUrl);
+        setValueAddEvent("banner", fileUrl);
       }
     });
   };
@@ -130,7 +130,7 @@ const useAddEventModal = () => {
       isFeatured: data.isFeatured === "true" ? true : false,
       isPublished: data.isPublished === "true" ? true : false,
       isOnline: data.isOnline === "true" ? true : false,
-      startDate: data.startDate ? toStandardDate(data.startDate) : "",
+      startDate: toStandardDate(data.startDate!),
       endDate: data.endDate ? toStandardDate(data.endDate) : "",
       location: {
         region: `${data.region}`,

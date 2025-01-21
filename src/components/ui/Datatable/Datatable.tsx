@@ -25,8 +25,10 @@ interface PropTypes {
   emptyContent: string;
   isLoading?: boolean;
   onClickButtonTopContent?: () => void;
-  totalPages: number;
   renderCell: (item: Record<string, unknown>, columnKey: Key) => ReactNode;
+  showLimit?: boolean;
+  showSearch?: boolean;
+  totalPages: number;
 }
 
 export default function Datatable(props: PropTypes) {
@@ -37,8 +39,10 @@ export default function Datatable(props: PropTypes) {
     emptyContent,
     isLoading,
     onClickButtonTopContent,
-    totalPages,
     renderCell,
+    showLimit = true,
+    showSearch = true,
+    totalPages,
   } = props;
 
   const {
@@ -53,14 +57,16 @@ export default function Datatable(props: PropTypes) {
   const TopContent = useMemo(() => {
     return (
       <div className="flex flex-col-reverse items-start justify-between gap-y-4 lg:flex-row lg:items-center">
-        <CustomInput
-          isClearable
-          className="w-full sm:max-w-[24%]"
-          placeholder="Search by name"
-          startContent={<CiSearch />}
-          onClear={handleClearSearch}
-          onChange={handleSearch}
-        />
+        {showSearch && (
+          <CustomInput
+            isClearable
+            className="w-full sm:max-w-[24%]"
+            placeholder="Search by name"
+            startContent={<CiSearch />}
+            onClear={handleClearSearch}
+            onChange={handleSearch}
+          />
+        )}
         {buttonTopContentLabel && (
           <Button color="danger" onPress={onClickButtonTopContent}>
             {buttonTopContentLabel}
@@ -78,21 +84,23 @@ export default function Datatable(props: PropTypes) {
   const BottomContent = useMemo(() => {
     return (
       <div className="flex items-center justify-center lg:justify-between">
-        <Select
-          className="hidden max-w-36 lg:block"
-          size="md"
-          selectedKeys={[String(currentLimit)]}
-          selectionMode="single"
-          onChange={handleChangeLimit}
-          startContent={<p className="text-sm">Show: </p>}
-          disallowEmptySelection
-        >
-          {LIMIT_LISTS.map((item) => (
-            <SelectItem key={item.value} value={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
-        </Select>
+        {showLimit && (
+          <Select
+            className="hidden max-w-36 lg:block"
+            size="md"
+            selectedKeys={[String(currentLimit)]}
+            selectionMode="single"
+            onChange={handleChangeLimit}
+            startContent={<p className="text-sm">Show: </p>}
+            disallowEmptySelection
+          >
+            {LIMIT_LISTS.map((item) => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </Select>
+        )}
 
         {totalPages > 1 && (
           <Pagination

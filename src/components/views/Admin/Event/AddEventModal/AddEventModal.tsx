@@ -126,6 +126,7 @@ export default function AddEventModal(props: PropTypes) {
                       variant="bordered"
                       labelPlacement="inside"
                       hideTimeZone
+                      value={field.value}
                       onChange={(value) => onChange(value)}
                       showMonthAndYearPickers
                       isInvalid={errors.startDate !== undefined}
@@ -143,6 +144,7 @@ export default function AddEventModal(props: PropTypes) {
                       variant="bordered"
                       labelPlacement="inside"
                       hideTimeZone
+                      value={field.value}
                       onChange={(value) => onChange(value)}
                       showMonthAndYearPickers
                       isInvalid={errors.endDate !== undefined}

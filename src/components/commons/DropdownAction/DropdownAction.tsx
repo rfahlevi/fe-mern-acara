@@ -10,7 +10,7 @@ import { CiMenuKebab } from "react-icons/ci";
 
 interface PropTypes {
   detailKey: string;
-  onPressDetail: () => {};
+  onPressDetail: () => void;
   onPressDelete: () => void;
 }
 
