@@ -11,6 +11,7 @@ import {
 import React, { Key, ReactNode, useCallback } from "react";
 import { COLUMN_LISTS_TICKET } from "./TicketTab.constant";
 import useTicketTab from "./useTicketTab";
+import AddTicketModal from "./AddTicketModal";
 
 export default function TicketTab() {
   const addTicketModal = useDisclosure();
@@ -47,30 +48,33 @@ export default function TicketTab() {
   );
 
   return (
-    <Card className="w-full p-4">
-      <CardHeader className="flex justify-between">
-        <div className="flex flex-col items-center">
-          <h1 className="w-full text-xl font-bold">Event Ticket</h1>
-          <p className="w-full text-sm text-default-400">
-            Manager ticket of this event
-          </p>
-        </div>
-        <Button color="danger" size="sm">
-          Add New Ticket
-        </Button>
-      </CardHeader>
-      <CardBody className="w-full pt-0">
-        <Datatable
-          columns={COLUMN_LISTS_TICKET}
-          data={dataTicket || []}
-          emptyContent="Ticket is Empty"
-          isLoading={isPendingTicket || isRefetchingTicket}
-          renderCell={renderCell}
-          totalPages={1}
-          showLimit={false}
-          showSearch={false}
-        />
-      </CardBody>
-    </Card>
+    <>
+      <Card className="w-full p-4">
+        <CardHeader className="flex justify-between">
+          <div className="flex flex-col items-center">
+            <h1 className="w-full text-xl font-bold">Event Ticket</h1>
+            <p className="w-full text-sm text-default-400">
+              Manager ticket of this event
+            </p>
+          </div>
+          <Button color="danger" size="sm" onPress={addTicketModal.onOpen}>
+            Add New Ticket
+          </Button>
+        </CardHeader>
+        <CardBody className="w-full pt-0">
+          <Datatable
+            columns={COLUMN_LISTS_TICKET}
+            data={dataTicket || []}
+            emptyContent="Ticket is Empty"
+            isLoading={isPendingTicket || isRefetchingTicket}
+            renderCell={renderCell}
+            totalPages={1}
+            showLimit={false}
+            showSearch={false}
+          />
+        </CardBody>
+      </Card>
+      <AddTicketModal {...addTicketModal} refectTicket={refetchTicket} />
+    </>
   );
 }
