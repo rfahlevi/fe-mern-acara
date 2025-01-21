@@ -15,6 +15,7 @@ import useTicketTab from "./useTicketTab";
 import AddTicketModal from "./AddTicketModal";
 import DeleteTicketModal from "./DeleteTicketModal";
 import { ITicket } from "@/types/Ticket";
+import UpdateTicketModal from "./UpdateTicketModal";
 
 export default function TicketTab() {
   const addTicketModal = useDisclosure();
@@ -40,6 +41,7 @@ export default function TicketTab() {
             <DropdownAction
               detailKey="ticket"
               onPressDetail={() => {
+                setSelectedDataTicket(ticket as ITicket);
                 updateTicketModal.onOpen();
               }}
               onPressDelete={() => {
@@ -85,6 +87,12 @@ export default function TicketTab() {
       <AddTicketModal {...addTicketModal} refectTicket={refetchTicket} />
       <DeleteTicketModal
         {...deleteTicketModal}
+        refectTicket={refetchTicket}
+        selectedDataTicket={selectedDataTicket}
+        setSelectedDataTicket={setSelectedDataTicket}
+      />
+      <UpdateTicketModal
+        {...updateTicketModal}
         refectTicket={refetchTicket}
         selectedDataTicket={selectedDataTicket}
         setSelectedDataTicket={setSelectedDataTicket}

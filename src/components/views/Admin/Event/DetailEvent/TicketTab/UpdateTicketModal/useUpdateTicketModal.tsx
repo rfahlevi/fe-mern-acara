@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   description: yup.string().required("Please input description"),
 });
 
-const useAddTicketModal = () => {
+const useUpdateTicketModal = (id: string) => {
   const router = useRouter();
 
   const {
@@ -22,47 +22,49 @@ const useAddTicketModal = () => {
     handleSubmit: handleFormSubmit,
     formState: { errors },
     reset,
+    setValue: setValueUpdateTicket,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const addTicket = async (payload: ITicket) => {
-    const res = await ticketServices.addTicket(payload);
+  const updateTicket = async (payload: ITicket) => {
+    const res = await ticketServices.updateTicket(id, payload);
     return res;
   };
 
   const {
-    mutate: mutateAddTicket,
-    isPending: isPendingMutateAddTicket,
-    isSuccess: isSuccessMutateAddTicket,
+    mutate: mutateUpdateTicket,
+    isPending: isPendingMutateUpdateTicket,
+    isSuccess: isSuccessMutateUpdateTicket,
   } = useMutation({
-    mutationFn: addTicket,
+    mutationFn: updateTicket,
     onError: (error) => {
       toast.error(error.message);
     },
     onSuccess: () => {
-      toast.success("Success add new ticket!");
+      toast.success("Success update new ticket!");
       reset();
     },
   });
 
-  const handleAddTicket = (data: ITicket) => {
+  const handleUpdateTicket = (data: ITicket) => {
     data.events = `${router.query.id}`;
     data.price = Number(data.price);
     data.quantity = Number(data.quantity);
 
-    mutateAddTicket(data);
+    mutateUpdateTicket(data);
   };
 
   return {
     control,
     errors,
     reset,
-    handleAddTicket,
+    handleUpdateTicket,
     handleFormSubmit,
-    isPendingMutateAddTicket,
-    isSuccessMutateAddTicket,
+    isPendingMutateUpdateTicket,
+    isSuccessMutateUpdateTicket,
+    setValueUpdateTicket,
   };
 };
 
-export default useAddTicketModal;
+export default useUpdateTicketModal;
