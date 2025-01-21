@@ -39,7 +39,13 @@ export default function Banner() {
       switch (columnKey) {
         case "image":
           return (
-            <Image src={`${cellValue}`} alt="image" width={200} height={200} />
+            <Image
+              src={`${cellValue}`}
+              alt="image"
+              width={200}
+              height={200}
+              className="rounded-lg"
+            />
           );
         case "isShow":
           return (
@@ -83,13 +89,13 @@ export default function Banner() {
           totalPages={dataBanner?.data.pagination.totalPages}
         />
       )}
-      {/* <AddBannerModal {...addBannerModal} refectBanner={refetchBanner} />
+      <AddBannerModal {...addBannerModal} refectBanner={refetchBanner} />
       <DeleteBannerModal
         {...deleteBannerModal}
         selectedId={selectedId}
         setSelectedId={setSelectedId}
         refectBanner={refetchBanner}
-      /> */}
+      />
     </section>
   );
 }

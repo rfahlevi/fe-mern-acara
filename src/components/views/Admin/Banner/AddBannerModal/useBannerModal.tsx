@@ -1,6 +1,6 @@
 import useMediaHandling from "@/hooks/useMediaHandling";
-import categoryServices from "@/services/category.service";
-import { ICategory } from "@/types/Category";
+import bannerServices from "@/services/banner.service";
+import { IBanner } from "@/types/Banner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -8,12 +8,12 @@ import { toast } from "sonner";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-  name: yup.string().required("Please input name"),
-  description: yup.string().required("Please input description"),
-  icon: yup.mixed<FileList | string>().required("Please input icon"),
+  title: yup.string().required("Please input title"),
+  isShow: yup.string().required("Please input image"),
+  image: yup.mixed<FileList | string>().required("Please select status"),
 });
 
-const useAddCategoryModal = () => {
+const useAddBannerModal = () => {
   const {
     isPendingMutateUploadFile,
     isPendingMutateDeleteFile,
@@ -33,21 +33,21 @@ const useAddCategoryModal = () => {
     resolver: yupResolver(schema),
   });
 
-  const preview = watch("icon");
-  const fileUrl = getValues("icon");
+  const preview = watch("image");
+  const fileUrl = getValues("image");
 
-  const handleUploadIcon = (
+  const handleUploadImage = (
     files: FileList,
     onChange: (files: FileList | undefined) => void,
   ) => {
     handleUploadFile(files, onChange, (fileUrl: string | undefined) => {
       if (fileUrl) {
-        setValue("icon", fileUrl);
+        setValue("image", fileUrl);
       }
     });
   };
 
-  const handleDeleteIcon = (
+  const handleDeleteImage = (
     onChange: (files: FileList | undefined) => void,
   ) => {
     handleDeleteFile(fileUrl, () => onChange(undefined));
@@ -60,45 +60,45 @@ const useAddCategoryModal = () => {
     });
   };
 
-  const addCategory = async (payload: ICategory) => {
-    const res = await categoryServices.addCategory(payload);
+  const addBanner = async (payload: IBanner) => {
+    const res = await bannerServices.addBanner(payload);
     return res;
   };
 
   const {
-    mutate: mutateAddCategory,
-    isPending: isPendingMutateAddCategory,
-    isSuccess: isSuccessMutateAddCategory,
+    mutate: mutateAddBanner,
+    isPending: isPendingMutateAddBanner,
+    isSuccess: isSuccessMutateAddBanner,
   } = useMutation({
-    mutationFn: addCategory,
+    mutationFn: addBanner,
     onError: (error) => {
       toast.error(error.message);
     },
     onSuccess: () => {
-      toast.success("Success add new category!");
+      toast.success("Success add new banner!");
       reset();
     },
   });
 
-  const handleAddCategory = (data: ICategory) => mutateAddCategory(data);
+  const handleAddBanner = (data: IBanner) => mutateAddBanner(data);
 
   return {
     control,
     errors,
     reset,
-    handleAddCategory,
+    handleAddBanner,
     handleFormSubmit,
-    isPendingMutateAddCategory,
-    isSuccessMutateAddCategory,
+    isPendingMutateAddBanner,
+    isSuccessMutateAddBanner,
 
     preview,
-    handleUploadIcon,
+    handleUploadImage,
     isPendingMutateUploadFile,
-    handleDeleteIcon,
+    handleDeleteImage,
     isPendingMutateDeleteFile,
 
     handleOnClose,
   };
 };
 
-export default useAddCategoryModal;
+export default useAddBannerModal;

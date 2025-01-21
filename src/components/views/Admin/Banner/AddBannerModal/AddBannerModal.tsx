@@ -1,5 +1,6 @@
 import CustomInput from "@/components/ui/CustomInput";
 import {
+  AutocompleteItem,
   Button,
   Modal,
   ModalBody,
@@ -9,41 +10,42 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import React, { useEffect } from "react";
-import useAddCategoryModal from "./useAddCategoryModal";
 import { Controller } from "react-hook-form";
 import InputFile from "@/components/ui/InputFile";
 import CustomTextArea from "@/components/ui/CustomTextArea";
+import useAddBannerModal from "./useBannerModal";
+import CustomAutoComplete from "@/components/ui/CustomAutoComplete";
 
 interface PropTypes {
   isOpen: boolean;
   onClose: () => void;
   onOpenChange: () => void;
-  refectCategory: () => void;
+  refectBanner: () => void;
 }
 
-export default function AddCategoryModal(props: PropTypes) {
-  const { isOpen, onClose, onOpenChange, refectCategory } = props;
+export default function AddBannerModal(props: PropTypes) {
+  const { isOpen, onClose, onOpenChange, refectBanner } = props;
   const {
     control,
     errors,
     handleFormSubmit,
-    handleAddCategory,
-    isPendingMutateAddCategory,
-    isSuccessMutateAddCategory,
-    handleUploadIcon,
+    handleAddBanner,
+    isPendingMutateAddBanner,
+    isSuccessMutateAddBanner,
+    handleUploadImage,
     isPendingMutateUploadFile,
     preview,
-    handleDeleteIcon,
+    handleDeleteImage,
     isPendingMutateDeleteFile,
     handleOnClose,
-  } = useAddCategoryModal();
+  } = useAddBannerModal();
 
   useEffect(() => {
-    if (isSuccessMutateAddCategory) {
+    if (isSuccessMutateAddBanner) {
       onClose();
-      refectCategory();
+      refectBanner();
     }
-  }, [isSuccessMutateAddCategory]);
+  }, [isSuccessMutateAddBanner]);
 
   const disabledSubmit =
     isPendingMutateUploadFile ||
@@ -58,63 +60,73 @@ export default function AddCategoryModal(props: PropTypes) {
       scrollBehavior="inside"
       onClose={() => handleOnClose(onClose)}
     >
-      <form onSubmit={handleFormSubmit(handleAddCategory)}>
+      <form onSubmit={handleFormSubmit(handleAddBanner)}>
         <ModalContent className="m-4">
-          <ModalHeader>Add Category</ModalHeader>
+          <ModalHeader>Add Banner</ModalHeader>
           <ModalBody>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <p className="font-semibold">Information</p>
                 <Controller
-                  name="name"
+                  name="title"
                   control={control}
                   render={({ field }) => (
                     <CustomInput
                       {...field}
                       autoFocus
-                      label="Name"
+                      label="Title"
                       variant="bordered"
                       labelPlacement="inside"
                       type="text"
-                      isInvalid={errors.name !== undefined}
-                      errorMessage={errors.name?.message}
+                      isInvalid={errors.title !== undefined}
+                      errorMessage={errors.title?.message}
                     />
                   )}
                 />
-              </div>
-              <Controller
-                name="description"
-                control={control}
-                render={({ field }) => (
-                  <CustomTextArea
-                    {...field}
-                    label="Description"
-                    variant="bordered"
-                    labelPlacement="inside"
-                    type="text"
-                    isInvalid={errors.description !== undefined}
-                    errorMessage={errors.description?.message}
-                  />
-                )}
-              />
-              <div className="flex flex-col gap-2">
-                <p className="font-semibold">Icon</p>
                 <Controller
-                  name="icon"
+                  name="isShow"
+                  control={control}
+                  render={({ field: { onChange, ...field } }) => (
+                    <CustomAutoComplete
+                      {...field}
+                      label="Status"
+                      variant="bordered"
+                      labelPlacement="inside"
+                      placeholder="Select or search status"
+                      defaultSelectedKey="false"
+                      onSelectionChange={(value) => onChange(value)}
+                      isInvalid={errors.isShow !== undefined}
+                      errorMessage={errors.isShow?.message}
+                    >
+                      <AutocompleteItem key="true" value="true">
+                        Publish
+                      </AutocompleteItem>
+                      <AutocompleteItem key="false" value="false">
+                        Draft
+                      </AutocompleteItem>
+                    </CustomAutoComplete>
+                  )}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold">Image</p>
+                <Controller
+                  name="image"
                   control={control}
                   render={({ field: { onChange, value, ...field } }) => (
                     <InputFile
                       {...field}
-                      name="icon"
+                      name="image"
                       isDropable
-                      onDelete={() => handleDeleteIcon(onChange)}
+                      onDelete={() => handleDeleteImage(onChange)}
                       onUpload={(files: FileList) =>
-                        handleUploadIcon(files, onChange)
+                        handleUploadImage(files, onChange)
                       }
                       isUploading={isPendingMutateUploadFile}
                       isDeleting={isPendingMutateDeleteFile}
-                      isInvalid={errors.icon !== undefined}
-                      errorMessage={errors.icon?.message}
+                      isInvalid={errors.image !== undefined}
+                      errorMessage={errors.image?.message}
                       preview={typeof preview === "string" ? preview : ""}
                     />
                   )}
@@ -132,13 +144,13 @@ export default function AddCategoryModal(props: PropTypes) {
               Cancel
             </Button>
             <Button color="danger" type="submit" disabled={disabledSubmit}>
-              {isPendingMutateAddCategory ? (
+              {isPendingMutateAddBanner ? (
                 <div className="flex gap-2">
                   <Spinner color="white" size="sm" />
                   Loading...
                 </div>
               ) : (
-                "Create Category"
+                "Create Banner"
               )}
             </Button>
           </ModalFooter>

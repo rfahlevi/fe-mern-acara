@@ -8,40 +8,40 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
-import useDeleteCategoryModal from "./useDeleteCategoryModal";
+import useDeleteBannerModal from "./useDeleteBannerModal";
 
 interface PropTypes {
   isOpen: boolean;
   onClose: () => void;
   onOpenChange: () => void;
-  refectCategory: () => void;
+  refectBanner: () => void;
   selectedId: string;
   setSelectedId: Dispatch<SetStateAction<string>>;
 }
 
-export default function DeleteCategoryModal(props: PropTypes) {
+export default function DeleteBannerModal(props: PropTypes) {
   const {
     isOpen,
     onClose,
     onOpenChange,
-    refectCategory,
+    refectBanner,
     selectedId,
     setSelectedId,
   } = props;
 
   const {
-    mutateDeleteCategory,
-    isPendingMutateDeleteCategory,
-    isSuccessMutateDeleteCategory,
-  } = useDeleteCategoryModal();
+    mutateDeleteBanner,
+    isPendingMutateDeleteBanner,
+    isSuccessMutateDeleteBanner,
+  } = useDeleteBannerModal();
 
   useEffect(() => {
-    if (isSuccessMutateDeleteCategory) {
+    if (isSuccessMutateDeleteBanner) {
       onClose();
-      refectCategory();
+      refectBanner();
       setSelectedId("");
     }
-  }, [isSuccessMutateDeleteCategory]);
+  }, [isSuccessMutateDeleteBanner]);
 
   return (
     <Modal
@@ -51,10 +51,10 @@ export default function DeleteCategoryModal(props: PropTypes) {
       scrollBehavior="inside"
     >
       <ModalContent className="m-4">
-        <ModalHeader>Delete Category</ModalHeader>
+        <ModalHeader>Delete Banner</ModalHeader>
         <ModalBody>
           <p className="text-medium">
-            Are you sure want to delete this category?
+            Are you sure want to delete this banner?
           </p>
         </ModalBody>
         <ModalFooter>
@@ -72,10 +72,10 @@ export default function DeleteCategoryModal(props: PropTypes) {
           <Button
             color="danger"
             type="submit"
-            disabled={isPendingMutateDeleteCategory}
-            onPress={() => mutateDeleteCategory(selectedId)}
+            disabled={isPendingMutateDeleteBanner}
+            onPress={() => mutateDeleteBanner(selectedId)}
           >
-            {isPendingMutateDeleteCategory ? (
+            {isPendingMutateDeleteBanner ? (
               <Spinner size="sm" color="white" />
             ) : (
               "Delete"
