@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 const schemaUpdateInfo = yup.object().shape({
-  name: yup.string().required("Please input name"),
-  description: yup.string().required("Please input category"),
+  title: yup.string().required("Please input title"),
+  isShow: yup.string().required("Please select status"),
 });
 
 const useInfoTab = () => {

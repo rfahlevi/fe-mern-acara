@@ -1,28 +1,29 @@
 import CustomInput from "@/components/ui/CustomInput";
 import CustomTextArea from "@/components/ui/CustomTextArea";
-import { ICategory } from "@/types/Category";
 import {
+  AutocompleteItem,
   Button,
   Card,
   CardBody,
   CardHeader,
   Skeleton,
   Spinner,
-  Textarea,
 } from "@nextui-org/react";
 import React, { useEffect } from "react";
 import useInfoTab from "./useInfoTab";
 import { Controller } from "react-hook-form";
+import { IBanner } from "@/types/Banner";
+import CustomAutoComplete from "@/components/ui/CustomAutoComplete";
 
 interface PropTypes {
-  dataCategory: ICategory;
-  onUpdate: (data: ICategory) => void;
+  dataBanner: IBanner;
+  onUpdate: (data: IBanner) => void;
   isPendingUpdate: boolean;
   isSuccessUpdate: boolean;
 }
 
 export default function InfoTab(props: PropTypes) {
-  const { dataCategory, onUpdate, isPendingUpdate, isSuccessUpdate } = props;
+  const { dataBanner, onUpdate, isPendingUpdate, isSuccessUpdate } = props;
   const {
     controlUpdateInfo,
     errorsUpdateInfo,
@@ -32,9 +33,9 @@ export default function InfoTab(props: PropTypes) {
   } = useInfoTab();
 
   useEffect(() => {
-    setValueUpdateInfo("name", `${dataCategory?.name}`);
-    setValueUpdateInfo("description", `${dataCategory?.description}`);
-  }, [dataCategory]);
+    setValueUpdateInfo("title", `${dataBanner?.title}`);
+    setValueUpdateInfo("isShow", `${dataBanner?.isShow}`);
+  }, [dataBanner]);
 
   useEffect(() => {
     if (isSuccessUpdate) {
@@ -45,9 +46,9 @@ export default function InfoTab(props: PropTypes) {
   return (
     <Card className="w-full p-4 lg:w-1/2">
       <CardHeader className="flex-col items-center">
-        <h1 className="w-full text-xl font-bold">Category Information</h1>
+        <h1 className="w-full text-xl font-bold">Banner Information</h1>
         <p className="w-full text-sm text-default-400">
-          Manager information of this category
+          Manager information of this banner
         </p>
       </CardHeader>
       <CardBody>
@@ -55,39 +56,47 @@ export default function InfoTab(props: PropTypes) {
           className="flex flex-col gap-4"
           onSubmit={handleSubmitUpdateInfo(onUpdate)}
         >
-          <Skeleton isLoaded={!!dataCategory?.name} className="rounded-lg">
+          <Skeleton isLoaded={!!dataBanner?.title} className="rounded-lg">
             <Controller
-              name="name"
+              name="title"
               control={controlUpdateInfo}
               render={({ field }) => (
                 <CustomInput
                   {...field}
-                  label="Name"
+                  label="Title"
                   variant="bordered"
                   labelPlacement="outside"
                   type="text"
-                  isInvalid={errorsUpdateInfo.name !== undefined}
-                  errorMessage={errorsUpdateInfo?.name?.message}
-                  defaultValue={dataCategory?.name}
+                  isInvalid={errorsUpdateInfo.title !== undefined}
+                  errorMessage={errorsUpdateInfo?.title?.message}
+                  defaultValue={dataBanner?.title}
                 />
               )}
             />
           </Skeleton>
-          <Skeleton isLoaded={!!dataCategory?.name} className="rounded-lg">
+          <Skeleton isLoaded={!!dataBanner} className="rounded-lg">
             <Controller
-              name="description"
+              name="isShow"
               control={controlUpdateInfo}
-              render={({ field }) => (
-                <CustomTextArea
+              render={({ field: { onChange, ...field } }) => (
+                <CustomAutoComplete
                   {...field}
-                  label="Description"
+                  label="Status"
                   variant="bordered"
                   labelPlacement="outside"
-                  type="text"
-                  isInvalid={errorsUpdateInfo.description !== undefined}
-                  errorMessage={errorsUpdateInfo.description?.message}
-                  defaultValue={dataCategory?.description}
-                />
+                  placeholder="Select or search status"
+                  defaultSelectedKey={dataBanner?.isShow ? "true" : "false"}
+                  onSelectionChange={(value) => onChange(value)}
+                  isInvalid={errorsUpdateInfo.isShow !== undefined}
+                  errorMessage={errorsUpdateInfo.isShow?.message}
+                >
+                  <AutocompleteItem key="true" value="true">
+                    Show
+                  </AutocompleteItem>
+                  <AutocompleteItem key="false" value="false">
+                    Hide
+                  </AutocompleteItem>
+                </CustomAutoComplete>
               )}
             />
           </Skeleton>
@@ -96,7 +105,7 @@ export default function InfoTab(props: PropTypes) {
             type="submit"
             color="danger"
             className="mt-2 disabled:bg-default-500"
-            disabled={isPendingUpdate || !dataCategory?._id}
+            disabled={isPendingUpdate || !dataBanner?._id}
           >
             {isPendingUpdate ? (
               <div className="flex gap-2">

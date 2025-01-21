@@ -54,14 +54,14 @@ export default function Banner() {
               size="sm"
               variant="flat"
             >
-              {cellValue === true ? "Published" : "Not Published"}
+              {cellValue === true ? "Show" : "Hide"}
             </Chip>
           );
         case "actions":
           return (
             <DropdownAction
               detailKey="banner"
-              onPressDetail={() => push(`/admin/categories/${banner._id}`)}
+              onPressDetail={() => push(`/admin/banners/${banner._id}`)}
               onPressDelete={() => {
                 setSelectedId(`${banner._id}`);
                 deleteBannerModal.onOpen();

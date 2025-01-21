@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import InputFile from "@/components/ui/InputFile";
 import CustomTextArea from "@/components/ui/CustomTextArea";
-import useAddBannerModal from "./useBannerModal";
+import useAddBannerModal from "./useAddBannerModal";
 import CustomAutoComplete from "@/components/ui/CustomAutoComplete";
 
 interface PropTypes {
@@ -99,10 +99,10 @@ export default function AddBannerModal(props: PropTypes) {
                       errorMessage={errors.isShow?.message}
                     >
                       <AutocompleteItem key="true" value="true">
-                        Publish
+                        Show
                       </AutocompleteItem>
                       <AutocompleteItem key="false" value="false">
-                        Draft
+                        Hide
                       </AutocompleteItem>
                     </CustomAutoComplete>
                   )}

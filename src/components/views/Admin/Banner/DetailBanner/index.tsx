@@ -1,3 +1,3 @@
-import DetailCategory from "./DetailCategory";
+import DetailBanner from "./DetailBanner";
 
-export default DetailCategory;
+export default DetailBanner;

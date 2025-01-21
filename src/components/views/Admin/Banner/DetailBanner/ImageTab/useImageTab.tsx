@@ -3,11 +3,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
-const schemaUpdateIcon = yup.object().shape({
-  icon: yup.mixed<FileList | string>().required("Please input icon"),
+const schemaUpdateImage = yup.object().shape({
+  image: yup.mixed<FileList | string>().required("Please input image"),
 });
 
-const useIconTab = () => {
+const useImageTab = () => {
   const {
     isPendingMutateUploadFile,
     isPendingMutateDeleteFile,
@@ -16,32 +16,32 @@ const useIconTab = () => {
   } = useMediaHandling();
 
   const {
-    control: controlUpdateIcon,
-    handleSubmit: handleSubmitUpdateIcon,
-    formState: { errors: errorsUpdateIcon },
-    reset: resetUpdateIcon,
-    watch: watchUpdateIcon,
-    getValues: getValuesUpdateIcon,
-    setValue: setValueUpdateIcon,
+    control: controlUpdateImage,
+    handleSubmit: handleSubmitUpdateImage,
+    formState: { errors: errorsUpdateImage },
+    reset: resetUpdateImage,
+    watch: watchUpdateImage,
+    getValues: getValuesUpdateImage,
+    setValue: setValueUpdateImage,
   } = useForm({
-    resolver: yupResolver(schemaUpdateIcon),
+    resolver: yupResolver(schemaUpdateImage),
   });
 
-  const preview = watchUpdateIcon("icon");
-  const fileUrl = getValuesUpdateIcon("icon");
+  const preview = watchUpdateImage("image");
+  const fileUrl = getValuesUpdateImage("image");
 
-  const handleUploadIcon = (
+  const handleUploadImage = (
     files: FileList,
     onChange: (files: FileList | undefined) => void,
   ) => {
     handleUploadFile(files, onChange, (fileUrl: string | undefined) => {
       if (fileUrl) {
-        setValueUpdateIcon("icon", fileUrl);
+        setValueUpdateImage("image", fileUrl);
       }
     });
   };
 
-  const handleDeleteIcon = (
+  const handleDeleteImage = (
     onChange: (files: FileList | undefined) => void,
   ) => {
     handleDeleteFile(fileUrl, () => onChange(undefined));
@@ -49,25 +49,25 @@ const useIconTab = () => {
 
   const handleOnClose = (onClose: () => void) => {
     handleDeleteFile(fileUrl, () => {
-      resetUpdateIcon();
+      resetUpdateImage();
       onClose();
     });
   };
 
   return {
-    handleDeleteIcon,
-    handleUploadIcon,
+    handleDeleteImage,
+    handleUploadImage,
     handleOnClose,
     isPendingMutateDeleteFile,
     isPendingMutateUploadFile,
 
-    errorsUpdateIcon,
-    controlUpdateIcon,
-    handleSubmitUpdateIcon,
-    resetUpdateIcon,
+    errorsUpdateImage,
+    controlUpdateImage,
+    handleSubmitUpdateImage,
+    resetUpdateImage,
 
     preview,
   };
 };
 
-export default useIconTab;
+export default useImageTab;
