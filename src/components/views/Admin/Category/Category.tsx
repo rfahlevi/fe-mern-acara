@@ -1,5 +1,5 @@
 import Datatable from "@/components/ui/Datatable";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 import { useRouter } from "next/router";
 import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constant";

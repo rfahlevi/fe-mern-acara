@@ -7,7 +7,7 @@ import { IEvent, IEventForm } from "@/types/Event";
 import { toStandardDate } from "@/utils/date";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getLocalTimeZone, now } from "@internationalized/date";
-import { DateValue } from "@nextui-org/react";
+import { DateValue } from "@heroui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useState } from "react";

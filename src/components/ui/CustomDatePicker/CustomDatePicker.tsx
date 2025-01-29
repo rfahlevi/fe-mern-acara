@@ -1,4 +1,4 @@
-import { DatePicker, DatePickerProps } from "@nextui-org/react";
+import { DatePicker, DatePickerProps } from "@heroui/react";
 import React, { forwardRef, Ref } from "react";
 
 const CustomDatePicker = forwardRef(

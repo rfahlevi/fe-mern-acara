@@ -10,7 +10,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { ChangeEvent, Key, ReactNode, useMemo } from "react";
 import CustomInput from "../CustomInput";
 import { CiSearch } from "react-icons/ci";

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import useEvent from "./useEvent";
-import { Chip, useDisclosure } from "@nextui-org/react";
+import { Chip, useDisclosure } from "@heroui/react";
 import useChangeUrl from "@/hooks/useChangeUrl";
 import Image from "next/image";
 import Datatable from "@/components/ui/Datatable";

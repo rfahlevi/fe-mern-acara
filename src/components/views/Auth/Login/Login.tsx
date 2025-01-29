@@ -1,11 +1,4 @@
-import {
-  Button,
-  button,
-  Card,
-  CardBody,
-  Input,
-  Spinner,
-} from "@nextui-org/react";
+import { Button, Card, CardBody, Spinner } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

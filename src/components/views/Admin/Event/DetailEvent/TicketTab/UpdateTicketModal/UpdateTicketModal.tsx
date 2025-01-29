@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import useUpdateTicketModal from "./useUpdateTicketModal";
 import { Controller } from "react-hook-form";

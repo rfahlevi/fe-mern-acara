@@ -8,7 +8,7 @@ import {
   CardHeader,
   select,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { Key, ReactNode, useCallback, useState } from "react";
 import { COLUMN_LISTS_TICKET } from "./TicketTab.constant";
 import useTicketTab from "./useTicketTab";

@@ -1,5 +1,5 @@
 import Datatable from "@/components/ui/Datatable";
-import { Chip, useDisclosure } from "@nextui-org/react";
+import { Chip, useDisclosure } from "@heroui/react";
 import { useRouter } from "next/router";
 import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import { COLUMN_LISTS_BANNER } from "./Banner.constant";

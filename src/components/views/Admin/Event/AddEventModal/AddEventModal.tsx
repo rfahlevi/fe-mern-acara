@@ -8,7 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import InputFile from "@/components/ui/InputFile";

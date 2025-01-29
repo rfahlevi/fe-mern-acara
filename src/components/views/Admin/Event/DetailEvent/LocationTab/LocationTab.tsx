@@ -8,7 +8,7 @@ import {
   CardHeader,
   Skeleton,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { useEffect } from "react";
 import useLocationTab from "./useLocationTab";
 import { Controller } from "react-hook-form";

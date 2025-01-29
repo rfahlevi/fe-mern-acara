@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteProps } from "@nextui-org/react";
+import { Autocomplete, AutocompleteProps } from "@heroui/react";
 import { forwardRef } from "react";
 
 interface PropTypes {

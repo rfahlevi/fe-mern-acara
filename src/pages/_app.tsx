@@ -1,6 +1,6 @@
 import AppShell from "@/components/commons/AppShell";
 import "@/styles/globals.css";
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
@@ -21,11 +21,11 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
-        <NextUIProvider>
+        <HeroUIProvider>
           <AppShell>
             <Component {...pageProps} />
           </AppShell>
-        </NextUIProvider>
+        </HeroUIProvider>
       </QueryClientProvider>
     </SessionProvider>
   );
