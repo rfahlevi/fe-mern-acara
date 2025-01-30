@@ -31,13 +31,7 @@ export default function LandingPageLayoutNavbar() {
   const { dataProfile } = useLandingPageLayoutNavbar();
 
   return (
-    <Navbar
-      maxWidth="full"
-      className="max-w-screen-2xl 2xl:container"
-      isBordered
-      isBlurred={false}
-      shouldBlockScroll
-    >
+    <Navbar maxWidth="full" isBordered isBlurred={false} shouldBlockScroll>
       <div className="flex items-center gap-8">
         <NavbarBrand as={Link} href="/">
           <Image
