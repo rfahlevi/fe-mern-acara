@@ -64,12 +64,14 @@ export default function CoverTab(props: PropTypes) {
               isLoaded={!!currentCover}
               className="aspect-video rounded-lg"
             >
-              <Image
-                src={currentCover}
-                alt="Event Cover"
-                fill
-                className="!relative rounded-lg"
-              />
+              {currentCover && (
+                <Image
+                  src={currentCover}
+                  alt="Event Cover"
+                  fill
+                  className="!relative rounded-lg"
+                />
+              )}
             </Skeleton>
           </div>
           <Controller

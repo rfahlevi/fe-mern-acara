@@ -81,11 +81,7 @@ export default function LandingPageLayoutNavbar() {
             <Dropdown>
               <DropdownTrigger>
                 <div className="flex cursor-pointer items-center gap-2">
-                  <Avatar
-                    src={dataProfile?.profilePicture}
-                    showFallback
-                    name={dataProfile?.fullName}
-                  />
+                  <Avatar src={dataProfile?.profilePicture} showFallback />
                   <div className="flex flex-col justify-start">
                     <p className="text-sm font-semibold text-default-700">
                       {dataProfile?.fullName}

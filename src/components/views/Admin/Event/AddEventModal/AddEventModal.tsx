@@ -18,6 +18,7 @@ import CustomAutoComplete from "@/components/ui/CustomAutoComplete";
 import CustomDatePicker from "@/components/ui/CustomDatePicker";
 import { IRegency } from "@/types/Event";
 import CustomTextArea from "@/components/ui/CustomTextArea";
+import { getLocalTimeZone, now } from "@internationalized/date";
 
 interface PropTypes {
   isOpen: boolean;
@@ -35,6 +36,7 @@ export default function AddEventModal(props: PropTypes) {
     handleAddEvent,
     isPendingMutateAddEvent,
     isSuccessMutateAddEvent,
+    setValueAddEvent,
 
     handleDeleteBanner,
     handleOnClose,
@@ -62,6 +64,11 @@ export default function AddEventModal(props: PropTypes) {
     isPendingMutateUploadFile ||
     isPendingMutateUploadFile ||
     isPendingMutateDeleteFile;
+
+  useEffect(() => {
+    setValueAddEvent("startDate", now(getLocalTimeZone()));
+    setValueAddEvent("endDate", now(getLocalTimeZone()));
+  }, [onOpenChange]);
 
   return (
     <Modal
@@ -164,7 +171,9 @@ export default function AddEventModal(props: PropTypes) {
                         labelPlacement="inside"
                         placeholder="Select or search status"
                         defaultSelectedKey="false"
-                        onSelectionChange={(value) => onChange(value)}
+                        onSelectionChange={(value) => {
+                          onChange(value);
+                        }}
                         isInvalid={errors.isPublished !== undefined}
                         errorMessage={errors.isPublished?.message}
                       >
@@ -202,6 +211,25 @@ export default function AddEventModal(props: PropTypes) {
                     )}
                   />
                 </div>
+
+                <Controller
+                  name="description"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomTextArea
+                      {...field}
+                      label="Description"
+                      variant="bordered"
+                      labelPlacement="inside"
+                      type="text"
+                      isInvalid={errors.description !== undefined}
+                      errorMessage={errors.description?.message}
+                    />
+                  )}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold">Location</p>
                 <Controller
                   name="isOnline"
                   control={control}
@@ -226,25 +254,6 @@ export default function AddEventModal(props: PropTypes) {
                     </CustomAutoComplete>
                   )}
                 />
-                <Controller
-                  name="description"
-                  control={control}
-                  render={({ field }) => (
-                    <CustomTextArea
-                      {...field}
-                      label="Description"
-                      variant="bordered"
-                      labelPlacement="inside"
-                      type="text"
-                      isInvalid={errors.description !== undefined}
-                      errorMessage={errors.description?.message}
-                    />
-                  )}
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <p className="font-semibold">Location</p>
                 <Controller
                   name="region"
                   control={control}

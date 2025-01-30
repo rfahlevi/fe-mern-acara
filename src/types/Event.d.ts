@@ -9,8 +9,8 @@ interface IEvent {
   isPublished?: boolean | string;
   isOnline?: boolean | string;
   description?: string;
-  startDate?: string;
-  endDate?: string;
+  startDate?: string | DateValue;
+  endDate?: string | DateValue;
   location?: {
     region: number | string;
     coordinates: number[];
@@ -21,8 +21,6 @@ interface IEvent {
 
 interface IEventForm extends IEvent {
   region?: number;
-  startDate?: DateValue;
-  endDate?: DateValue;
   latitude?: number;
   longitude?: number;
   address?: string;

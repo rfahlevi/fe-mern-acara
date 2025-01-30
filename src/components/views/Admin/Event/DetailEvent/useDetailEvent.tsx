@@ -1,6 +1,7 @@
 import eventServices from "@/services/event.service";
 import { IEvent, IEventForm } from "@/types/Event";
 import { toStandardDate } from "@/utils/date";
+import { DateValue } from "@heroui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
@@ -58,8 +59,8 @@ const useDetailEvent = () => {
       ...data,
       isFeatured: data.isFeatured === "true" ? true : false,
       isPublished: data.isPublished === "true" ? true : false,
-      startDate: data.startDate ? toStandardDate(data.startDate) : "",
-      endDate: data.endDate ? toStandardDate(data.endDate) : "",
+      startDate: toStandardDate(data.startDate as DateValue),
+      endDate: toStandardDate(data.endDate as DateValue),
     };
 
     // console.log("Payload", payload);
@@ -69,13 +70,12 @@ const useDetailEvent = () => {
 
   const handleUpdateLocation = (data: IEventForm) => {
     const payload = {
-      isOnline: data.isOnline === "true" ? true : false,
+      ...data,
       location: {
         region: `${data.region}`,
         coordinates: [Number(`${data.latitude}`), Number(`${data.longitude}`)],
         address: `${data.address}`,
       },
-      banner: `${data.banner}`,
     };
 
     // console.log("Payload", payload);

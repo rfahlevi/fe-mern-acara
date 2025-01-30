@@ -6,7 +6,6 @@ import eventServices from "@/services/event.service";
 import { IEvent, IEventForm } from "@/types/Event";
 import { toStandardDate } from "@/utils/date";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getLocalTimeZone, now } from "@internationalized/date";
 import { DateValue } from "@heroui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -56,8 +55,6 @@ const useAddEventModal = () => {
   const preview = watch("banner");
   const fileUrl = getValues("banner");
 
-  setValueAddEvent("startDate", now(getLocalTimeZone()));
-  setValueAddEvent("endDate", now(getLocalTimeZone()));
   setValueAddEvent("isPublished", "false");
   setValueAddEvent("isFeatured", "false");
   setValueAddEvent("isOnline", "false");
@@ -127,11 +124,11 @@ const useAddEventModal = () => {
   const handleAddEvent = (data: IEventForm) => {
     const payload = {
       ...data,
-      isFeatured: data.isFeatured === "true" ? true : false,
-      isPublished: data.isPublished === "true" ? true : false,
-      isOnline: data.isOnline === "true" ? true : false,
-      startDate: toStandardDate(data.startDate!),
-      endDate: data.endDate ? toStandardDate(data.endDate) : "",
+      startDate: toStandardDate(data.startDate as DateValue),
+      endDate: toStandardDate(data.endDate as DateValue),
+      isPublished: Boolean(data.isPublished),
+      isFeatured: Boolean(data.isFeatured),
+      isOnline: Boolean(data.isOnline),
       location: {
         region: `${data.region}`,
         coordinates: [Number(`${data.latitude}`), Number(`${data.longitude}`)],
@@ -140,7 +137,7 @@ const useAddEventModal = () => {
       banner: `${data.banner}`,
     };
 
-    // console.log("Payload", payload);
+    console.log("Payload", payload);
 
     mutateAddEvent(payload);
   };
@@ -153,6 +150,7 @@ const useAddEventModal = () => {
     handleFormSubmit,
     isPendingMutateAddEvent,
     isSuccessMutateAddEvent,
+    setValueAddEvent,
 
     preview,
     handleUploadBanner,
