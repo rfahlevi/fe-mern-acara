@@ -14,7 +14,7 @@ const CustomInput = forwardRef(
         classNames={{
           label: ["text-sm"],
           inputWrapper: [
-            "border border-default-200 h-12 shadow-none",
+            "border border-default-200 h-12 shadow-none h-6",
             "data-[hover=true]:border-danger-300",
             "group-data-[focus=true]:border-danger-300",
           ],
