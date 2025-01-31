@@ -3,7 +3,7 @@ import { DateValue } from "@nextui-org/react";
 interface IEvent {
   _id?: string;
   name?: string;
-  // slug: string;
+  slug?: string;
   category?: string;
   isFeatured?: boolean | string;
   isPublished?: boolean | string;

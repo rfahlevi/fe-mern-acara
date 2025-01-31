@@ -15,7 +15,7 @@ export default function HomeSlider(props: PropTypes) {
   const { banners, isLoadingBanners } = props;
 
   return (
-    <div className="mx-6 mb-6 h-[20vw] rounded-lg lg:mx-0 lg:mb-16">
+    <div className="mx-6 mb-6 h-[30vw] rounded-lg lg:mx-0 lg:h-[20vw]">
       {!isLoadingBanners ? (
         <Swiper
           pagination={{

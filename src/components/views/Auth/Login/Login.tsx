@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import CustomInput from "@/components/ui/CustomInput";
 import { Controller } from "react-hook-form";
 import useLogin from "./useLogin";
+import { useEffect } from "react";
 
 const Login = () => {
   const {
@@ -16,6 +17,10 @@ const Login = () => {
     isPendingLogin,
     errors,
   } = useLogin();
+
+  useEffect(() => {
+    console.log("Form errors:", errors);
+  }, [errors]);
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row lg:gap-20">

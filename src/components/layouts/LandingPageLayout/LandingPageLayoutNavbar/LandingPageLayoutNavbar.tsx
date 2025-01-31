@@ -26,8 +26,8 @@ import { signOut, useSession } from "next-auth/react";
 import useLandingPageLayoutNavbar from "./useLandingPageLayoutNavbar";
 
 export default function LandingPageLayoutNavbar() {
-  const router = useRouter();
   const session = useSession();
+  const router = useRouter();
   const { dataProfile } = useLandingPageLayoutNavbar();
 
   return (
@@ -63,7 +63,7 @@ export default function LandingPageLayoutNavbar() {
         <NavbarItem className="hidden lg:relative lg:flex">
           <CustomInput
             isClearable
-            className="w-[300px]"
+            className="he w-[300px]"
             placeholder="Search event..."
             startContent={<CiSearch />}
             onClear={() => {}}
@@ -110,6 +110,7 @@ export default function LandingPageLayoutNavbar() {
                 <Button
                   as={Link}
                   color="danger"
+                  size="sm"
                   variant={item.variant as ButtonProps["variant"]}
                   href={item.href}
                 >

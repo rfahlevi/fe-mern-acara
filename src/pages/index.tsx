@@ -4,7 +4,7 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <LandingPageLayaout title="Home">
+    <LandingPageLayaout title="Acara | Home">
       <Home />
     </LandingPageLayaout>
   );
