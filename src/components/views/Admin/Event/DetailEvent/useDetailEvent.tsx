@@ -63,8 +63,6 @@ const useDetailEvent = () => {
       endDate: toStandardDate(data.endDate as DateValue),
     };
 
-    // console.log("Payload", payload);
-
     mutateUpdateEvent(payload);
   };
 
@@ -77,8 +75,6 @@ const useDetailEvent = () => {
         address: `${data.address}`,
       },
     };
-
-    // console.log("Payload", payload);
 
     mutateUpdateEvent(payload);
   };

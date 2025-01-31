@@ -19,7 +19,7 @@ const Login = () => {
   } = useLogin();
 
   useEffect(() => {
-    console.log("Form errors:", errors);
+    "Form errors:", errors;
   }, [errors]);
 
   return (

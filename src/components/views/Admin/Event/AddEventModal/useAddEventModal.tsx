@@ -137,8 +137,6 @@ const useAddEventModal = () => {
       banner: `${data.banner}`,
     };
 
-    console.log("Payload", payload);
-
     mutateAddEvent(payload);
   };
 

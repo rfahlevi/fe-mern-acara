@@ -21,7 +21,7 @@ export default function CardEvent(props: PropTypes) {
       isPressable
       as={Link}
       href={`/events/${event?.slug}`}
-      className={cn("cursor-pointer", className)}
+      className={cn("cursor-pointer rounded-md", className)}
     >
       <CardBody>
         {isLoading ? (
