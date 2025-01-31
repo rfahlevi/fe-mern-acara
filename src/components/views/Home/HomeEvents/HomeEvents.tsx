@@ -1,6 +1,5 @@
 import CardEvent from "@/components/ui/CardEvent";
 import { IEvent } from "@/types/Event";
-import { Skeleton } from "@heroui/react";
 import Link from "next/link";
 
 interface PropTypes {
@@ -9,11 +8,11 @@ interface PropTypes {
   title: string;
 }
 
-export default function HomeList(props: PropTypes) {
+export default function HomeEvents(props: PropTypes) {
   const { events, isLoading, title } = props;
 
   return (
-    <section className="mb-16 px-6">
+    <section className="mb-16 px-4 lg:px-0">
       <div className="mb-2 flex items-center justify-between lg:px-0">
         <h2 className="text-lg font-bold text-danger lg:text-xl">{title}</h2>
         <Link

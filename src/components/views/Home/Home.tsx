@@ -1,16 +1,21 @@
 import React from "react";
 import HomeSlider from "./HomeSlider";
 import useHome from "./useHome";
-import HomeList from "./HomeList";
+import HomeList from "./HomeEvents";
 import { Skeleton } from "@heroui/react";
 import Image from "next/image";
+import HomeEvents from "./HomeEvents";
+import HomeCategories from "./HomeCategories";
+import HomeBanner from "./HomeBanner";
 
 export default function Home() {
   const {
     dataBanners,
+    dataCategories,
     dataFeaturedEvents,
     dataLatestEvents,
     isLoadingBanner,
+    isLoadingCategories,
     isLoadingFeaturedEvents,
     isLoadingLatestEvents,
   } = useHome();
@@ -23,22 +28,18 @@ export default function Home() {
         events={dataFeaturedEvents}
         isLoading={isLoadingFeaturedEvents}
       />
-      <Skeleton
-        isLoaded={!isLoadingBanner}
-        className="mb-16 h-[20vw] w-full rounded-lg"
-      >
-        <Image
-          src={dataBanners && dataBanners[1]?.image}
-          alt="single-banner"
-          width={1920}
-          height={500}
-          className="h-[20vw] rounded-lg object-cover object-center"
-        />
-      </Skeleton>
-      <HomeList
+      <HomeBanner
+        bannerUrl={dataBanners && dataBanners[1]?.image}
+        isLoadingBanner={isLoadingBanner}
+      />
+      <HomeEvents
         title={"Latest Events"}
         events={dataLatestEvents}
         isLoading={isLoadingLatestEvents}
+      />
+      <HomeCategories
+        categories={dataCategories}
+        isLoading={isLoadingCategories}
       />
     </div>
   );
