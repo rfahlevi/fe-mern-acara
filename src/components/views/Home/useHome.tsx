@@ -1,5 +1,4 @@
 import bannerServices from "@/services/banner.service";
-import React from "react";
 import {
   LIMIT_BANNER,
   LIMIT_CATEGORY,
@@ -61,7 +60,7 @@ const useHome = () => {
     let params = `limit=${LIMIT_CATEGORY}&page=${PAGE_DEFAULT}`;
 
     const res = await categoryServices.getCategories(params);
-    const data = res.data?.data;
+    const data = res;
 
     return data;
   };

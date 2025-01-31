@@ -21,7 +21,6 @@ const toStandardDate = (date: DateValue) => {
     second,
   )}`;
 
-  "toStandardDate", result;
   return result;
 };
 

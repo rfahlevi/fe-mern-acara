@@ -6,6 +6,8 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Listbox,
+  ListboxItem,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -13,6 +15,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  Spinner,
 } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,11 +27,20 @@ import CustomInput from "@/components/ui/CustomInput";
 import { CiSearch } from "react-icons/ci";
 import { signOut, useSession } from "next-auth/react";
 import useLandingPageLayoutNavbar from "./useLandingPageLayoutNavbar";
+import { IEvent } from "@/types/Event";
 
 export default function LandingPageLayoutNavbar() {
   const session = useSession();
   const router = useRouter();
-  const { dataProfile } = useLandingPageLayoutNavbar();
+  const {
+    dataEventsSearch,
+    dataProfile,
+    isRefecthingEventSearch,
+    isLoadingEventsSearch,
+    handleSearch,
+    search,
+    setSearch,
+  } = useLandingPageLayoutNavbar();
 
   return (
     <Navbar maxWidth="full" isBordered isBlurred={false} shouldBlockScroll>
@@ -66,9 +78,42 @@ export default function LandingPageLayoutNavbar() {
             className="he w-[300px]"
             placeholder="Search event..."
             startContent={<CiSearch />}
-            onClear={() => {}}
-            onChange={() => {}}
+            onClear={() => setSearch("")}
+            onChange={handleSearch}
           />
+          {search !== "" && (
+            <Listbox
+              items={dataEventsSearch || []}
+              emptyContent="Event not found"
+              className="absolute right-0 top-12 rounded-xl border border-default-200 bg-white"
+            >
+              {!isRefecthingEventSearch && !isLoadingEventsSearch ? (
+                (item: IEvent) => (
+                  <ListboxItem
+                    key={`${item._id}`}
+                    href={`/events/${item.slug}`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={`${item?.banner}`}
+                        alt="banner"
+                        className="w-2/5 rounded-md"
+                        width={100}
+                        height={40}
+                      />
+                      <p className="line-clamp-2 w-3/5 text-wrap">
+                        {item?.name}
+                      </p>
+                    </div>
+                  </ListboxItem>
+                )
+              ) : (
+                <ListboxItem key="loading">
+                  <Spinner color="danger" size="sm" />
+                </ListboxItem>
+              )}
+            </Listbox>
+          )}
         </NavbarItem>
         {session.status === "authenticated" ? (
           <NavbarItem className="hidden lg:block">

@@ -6,17 +6,18 @@ interface PropTypes {
   events: IEvent[];
   isLoading: boolean;
   title: string;
+  seeMoreUrl?: string;
 }
 
 export default function HomeEvents(props: PropTypes) {
-  const { events, isLoading, title } = props;
+  const { events, isLoading, title, seeMoreUrl = "/events" } = props;
 
   return (
     <section className="mb-16 px-4 lg:px-0">
       <div className="mb-2 flex items-center justify-between lg:px-0">
         <h2 className="text-lg font-bold text-danger lg:text-xl">{title}</h2>
         <Link
-          href="/events"
+          href={seeMoreUrl}
           className="text-sm font-medium text-default-900 hover:text-foreground-500"
         >
           See More

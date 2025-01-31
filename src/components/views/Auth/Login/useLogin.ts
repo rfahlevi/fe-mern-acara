@@ -38,8 +38,6 @@ const useLogin = () => {
       callbackUrl,
     });
 
-    "LoginService ", result;
-
     if (result?.error && result.status === 401) {
       throw new Error("Your credentials are incorrect");
     }
@@ -59,7 +57,6 @@ const useLogin = () => {
   });
 
   const handleLogin = (data: ILogin) => {
-    "Handle login", data;
     mutateLogin(data);
   };
 

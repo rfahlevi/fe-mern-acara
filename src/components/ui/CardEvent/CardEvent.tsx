@@ -52,8 +52,10 @@ export default function CardEvent(props: PropTypes) {
             <h2 className="line-clamp-1 font-semibold text-danger">
               {event?.name}
             </h2>
-            <p className="mb-2 line-clamp-2 text-sm">{event?.description}</p>
-            <p className="text-sm text-foreground-500">
+            <p className="mb-2 line-clamp-2 text-sm text-default-600">
+              {event?.description}
+            </p>
+            <p className="text-xs text-foreground-500">
               {toConvertTime(event?.startDate)}
             </p>
           </Fragment>

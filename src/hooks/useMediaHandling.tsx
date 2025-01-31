@@ -43,7 +43,6 @@ const useMediaHandling = () => {
         callback: (fileUrl: string) => void;
       }) => uploadFile(variables.file, variables.callback),
       onError: (error) => {
-        "error", error;
         toast.error(error.message);
       },
     });

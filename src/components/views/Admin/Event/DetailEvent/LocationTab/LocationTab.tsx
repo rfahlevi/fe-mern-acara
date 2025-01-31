@@ -92,7 +92,7 @@ export default function LocationTab(props: PropTypes) {
                   variant="bordered"
                   labelPlacement="outside"
                   placeholder="Select or search status"
-                  defaultSelectedKey={dataEvent?.isPublished ? "true" : "false"}
+                  defaultSelectedKey={dataEvent?.isOnline ? "true" : "false"}
                   onSelectionChange={(value) => onChange(value)}
                   isInvalid={errorsUpdateLocation.isOnline !== undefined}
                   errorMessage={errorsUpdateLocation.isOnline?.message}

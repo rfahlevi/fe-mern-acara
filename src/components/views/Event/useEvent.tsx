@@ -6,17 +6,23 @@ import { useEffect } from "react";
 
 const useEvent = () => {
   const router = useRouter();
-  const { currentLimit, currentPage } = useChangeUrl();
-  const { setUrl } = useChangeUrl();
+  const {
+    currentCategory,
+    currentIsFeatured,
+    currentIsOnline,
+    currentLimit,
+    currentPage,
+  } = useChangeUrl();
+  const { setUrlExplore } = useChangeUrl();
 
   useEffect(() => {
     if (router.isReady) {
-      setUrl();
+      setUrlExplore();
     }
   }, [router.isReady]);
 
   const getEvents = async () => {
-    let params = `limit=${currentLimit}&page=${currentPage}`;
+    let params = `limit=${currentLimit}&page=${currentPage}&category=${currentCategory}&isFeatured=${currentIsFeatured}&isOnline=${currentIsOnline}&isPublished=true`;
 
     const res = await eventServices.getEvents(params);
     const data = res?.data;
@@ -29,7 +35,14 @@ const useEvent = () => {
     isRefetching: isRefetchingEvents,
     refetch: refetchEvents,
   } = useQuery({
-    queryKey: ["ExploreEvents", currentPage, currentLimit],
+    queryKey: [
+      "ExploreEvents",
+      currentCategory,
+      currentIsFeatured,
+      currentIsOnline,
+      currentLimit,
+      currentPage,
+    ],
     queryFn: () => getEvents(),
     enabled: router.isReady && !!currentPage && !!currentLimit,
   });

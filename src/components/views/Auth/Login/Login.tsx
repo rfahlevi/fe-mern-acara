@@ -18,10 +18,6 @@ const Login = () => {
     errors,
   } = useLogin();
 
-  useEffect(() => {
-    "Form errors:", errors;
-  }, [errors]);
-
   return (
     <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row lg:gap-20">
       <div className="flex w-1/3 flex-col items-center justify-center gap-10">

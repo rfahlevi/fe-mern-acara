@@ -27,6 +27,7 @@ export default function Home() {
         title={"Featured Events"}
         events={dataFeaturedEvents}
         isLoading={isLoadingFeaturedEvents}
+        seeMoreUrl="/events?isFeatured=true"
       />
       <HomeBanner
         bannerUrl={dataBanners && dataBanners[1]?.image}
@@ -38,7 +39,7 @@ export default function Home() {
         isLoading={isLoadingLatestEvents}
       />
       <HomeCategories
-        categories={dataCategories}
+        categories={dataCategories?.data?.data}
         isLoading={isLoadingCategories}
       />
     </div>
