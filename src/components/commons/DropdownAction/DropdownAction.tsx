@@ -5,7 +5,6 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import React from "react";
 import { CiMenuKebab } from "react-icons/ci";
 
 interface PropTypes {

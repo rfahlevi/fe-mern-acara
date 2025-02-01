@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { NAV_ITEMS, SOCIAL_ITEMS } from "../LandingPageLayout.constant";
 
 export default function LandingPageLayoutFooter() {

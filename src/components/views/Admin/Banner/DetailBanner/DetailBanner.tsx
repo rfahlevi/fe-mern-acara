@@ -1,5 +1,4 @@
 import { Tab, Tabs } from "@heroui/react";
-import React from "react";
 import useDetailBanner from "./useDetailBanner";
 import ImageTab from "./ImageTab";
 import InfoTab from "./InfoTab";

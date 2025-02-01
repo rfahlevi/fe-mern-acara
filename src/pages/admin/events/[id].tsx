@@ -1,6 +1,5 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import DetailEvent from "@/components/views/Admin/Event/DetailEvent";
-import React from "react";
 
 const AdminDetailEventPage = () => {
   return (

@@ -34,6 +34,7 @@ export default function LocationTab(props: PropTypes) {
     isPendingUpdate,
     isSuccessUpdate,
   } = props;
+
   const {
     controlUpdateLocation,
     dataRegion,

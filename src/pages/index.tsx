@@ -1,6 +1,5 @@
 import LandingPageLayaout from "@/components/layouts/LandingPageLayout";
 import Home from "@/components/views/Home";
-import React from "react";
 
 const HomePage = () => {
   return (

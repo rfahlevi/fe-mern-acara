@@ -1,3 +1,4 @@
+import { onErrorHandler } from "@/libs/axios/responseHandler";
 import ticketServices from "@/services/ticket.service";
 import { ITicket } from "@/types/Ticket";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -39,6 +40,7 @@ const useUpdateTicketModal = (id: string) => {
   } = useMutation({
     mutationFn: updateTicket,
     onError: (error) => {
+      onErrorHandler(error);
       toast.error(error.message);
     },
     onSuccess: () => {

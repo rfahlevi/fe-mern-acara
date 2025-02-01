@@ -1,6 +1,5 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Category from "@/components/views/Admin/Category";
-import React from "react";
 
 const AdminCategoryPage = () => {
   return (

@@ -11,7 +11,10 @@ const onErrorHandler = (error: Error) => {
   const { response } = error as AxiosError;
 
   const res = response?.data as ErrorResponseData;
-  if (response && res?.data?.name === "TokenExpiredError") {
+  if (
+    response &&
+    (res?.data?.name === "TokenExpiredError" || response?.status === 403)
+  ) {
     signOut();
   }
 };

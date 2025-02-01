@@ -1,6 +1,5 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Banner from "@/components/views/Admin/Banner";
-import React from "react";
 
 const AdminBannerPage = () => {
   return (

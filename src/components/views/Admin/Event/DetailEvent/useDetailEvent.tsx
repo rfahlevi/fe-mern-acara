@@ -69,9 +69,10 @@ const useDetailEvent = () => {
   const handleUpdateLocation = (data: IEventForm) => {
     const payload = {
       ...data,
+      isOnline: data.isOnline === "true" ? true : false,
       location: {
         region: `${data.region}`,
-        coordinates: [Number(`${data.latitude}`), Number(`${data.longitude}`)],
+        coordinates: [data.latitude as number, data.longitude as number],
         address: `${data.address}`,
       },
     };

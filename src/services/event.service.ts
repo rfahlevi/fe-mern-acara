@@ -5,6 +5,8 @@ import { IEvent } from "@/types/Event";
 const eventServices = {
   getEvents: (params?: string) => instance.get(`${endpoint.EVENTS}?${params}`),
   getEventById: (id: string) => instance.get(`${endpoint.EVENTS}/${id}`),
+  getEventBySlug: (slug: string) =>
+    instance.get(`${endpoint.EVENTS}/${slug}/slug`),
   deleteEvent: (id: string) => instance.delete(`${endpoint.EVENTS}/${id}`),
   updateEvent: (id: string, payload: IEvent) =>
     instance.put(`${endpoint.EVENTS}/${id}`, payload),

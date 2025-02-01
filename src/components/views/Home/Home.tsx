@@ -1,9 +1,6 @@
-import React from "react";
 import HomeSlider from "./HomeSlider";
 import useHome from "./useHome";
 import HomeList from "./HomeEvents";
-import { Skeleton } from "@heroui/react";
-import Image from "next/image";
 import HomeEvents from "./HomeEvents";
 import HomeCategories from "./HomeCategories";
 import HomeBanner from "./HomeBanner";
