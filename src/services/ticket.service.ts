@@ -7,6 +7,8 @@ const ticketServices = {
     instance.post(`${endpoint.TICKETS}`, payload),
   getTicketsByEventId: (ticketId: string) =>
     instance.get(`${endpoint.TICKETS}/${ticketId}/events`),
+  getTicketsId: (ticketId: string) =>
+    instance.get(`${endpoint.TICKETS}/${ticketId}`),
   deleteTicket: (id: string) => instance.delete(`${endpoint.TICKETS}/${id}`),
   updateTicket: (id: string, payload: ITicket) =>
     instance.put(`${endpoint.TICKETS}/${id}`, payload),

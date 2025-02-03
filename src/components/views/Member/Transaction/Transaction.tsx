@@ -1,23 +1,17 @@
 import Datatable from "@/components/ui/Datatable";
-import { Chip, useDisclosure } from "@heroui/react";
+import { Chip } from "@heroui/react";
 import { useRouter } from "next/router";
 import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import { COLUMN_LISTS_TRANSACTION } from "./Transaction.constant";
 import useTransaction from "./useTransaction";
-import Image from "next/image";
 import useChangeUrl from "@/hooks/useChangeUrl";
 import DropdownAction from "@/components/commons/DropdownAction";
 import convertIDR from "@/utils/currency";
-import { onErrorHandler } from "@/libs/axios/responseHandler";
 
 export default function Transaction() {
   const { push, query, isReady } = useRouter();
-  const {
-    dataTransactions,
-    errorTransactions,
-    isLoadingTransactions,
-    isRefetchingTransactions,
-  } = useTransaction();
+  const { dataTransactions, isLoadingTransactions, isRefetchingTransactions } =
+    useTransaction();
 
   const { setUrl } = useChangeUrl();
 
@@ -62,7 +56,7 @@ export default function Transaction() {
             <DropdownAction
               detailKey="transaction"
               onPressDetail={() =>
-                push(`/member/transactions/${transaction._id}`)
+                push(`/member/transactions/${transaction.orderId}`)
               }
               hideButtonDelete
             />

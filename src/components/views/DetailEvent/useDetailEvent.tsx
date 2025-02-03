@@ -23,15 +23,13 @@ const useDetailEvent = () => {
   });
 
   const getTicketsByEventId = async () => {
-    const { data } = await ticketServices.getTicketsByEventId(
-      `${dataEvent?._id}`,
-    );
+    const res = await ticketServices.getTicketsByEventId(`${dataEvent?._id}`);
 
-    return data.data;
+    return res?.data?.data;
   };
 
   const { data: dataTicket } = useQuery({
-    queryKey: ["Tickets"],
+    queryKey: ["TicketsByEventId"],
     queryFn: getTicketsByEventId,
     enabled: !!dataEvent?._id,
   });
@@ -40,7 +38,7 @@ const useDetailEvent = () => {
 
   const dataTicketInCart = useMemo(() => {
     if (dataTicket) {
-      return dataTicket.find((ticket: ITicket) => ticket._id === cart.ticket);
+      return dataTicket?.find((ticket: ITicket) => ticket._id === cart.ticket);
     }
 
     return null;

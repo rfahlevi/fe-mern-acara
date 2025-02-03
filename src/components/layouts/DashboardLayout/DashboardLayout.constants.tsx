@@ -17,7 +17,7 @@ const SIDEBAR_MEMBER = [
   {
     key: "transaction",
     label: "Transaction",
-    href: "/member/transaction",
+    href: "/member/transactions",
     icon: <CiWallet />,
   },
   {

@@ -56,9 +56,7 @@ const useRegister = () => {
 
   const { mutate: mutateRegister, isPending: isPendingRegister } = useMutation({
     mutationFn: registerService,
-    onMutate(variables) {
-      console.log("Mutate", variables);
-    },
+    onMutate(variables) {},
     onError(error) {
       const customError = error as CustomError;
       toast.error(customError.response?.data?.meta?.message ?? error.message);
