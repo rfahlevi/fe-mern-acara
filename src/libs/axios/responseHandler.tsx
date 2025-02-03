@@ -1,20 +1,11 @@
-import { AxiosError } from "axios";
+import { CustomError } from "@/types/CustomError";
 import { signOut } from "next-auth/react";
 
-interface ErrorResponseData {
-  data: {
-    name: string;
-  };
-}
-
 const onErrorHandler = (error: Error) => {
-  const { response } = error as AxiosError;
+  const { response } = error as CustomError;
 
-  const res = response?.data as ErrorResponseData;
-  if (
-    response &&
-    (res?.data?.name === "TokenExpiredError" || response?.status === 403)
-  ) {
+  const status = response?.data?.meta?.status;
+  if (response && status === 401) {
     signOut();
   }
 };

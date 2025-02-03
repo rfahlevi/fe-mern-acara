@@ -1,10 +1,12 @@
 interface CustomError extends Error {
-    message: string,
-    response?: {
-        data: {
-            message: string
-        }
-    }
+  response?: {
+    data: {
+      meta: {
+        message: string;
+        status: number;
+      };
+    };
+  };
 }
 
-export type { CustomError }
+export type { CustomError };

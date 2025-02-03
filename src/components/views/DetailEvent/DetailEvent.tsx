@@ -12,12 +12,21 @@ import { FaLocationDot } from "react-icons/fa6";
 import Image from "next/image";
 import { ITicket } from "@/types/Ticket";
 import DetailEventTicket from "./DetailEventTicket";
+import DetailEventCart from "./DetailEventCart";
+import Script from "next/script";
+import environment from "@/config/environment";
 
 export default function DetailEvent() {
-  const { dataEvent, dataTicket, isLoadingEvent, isLoadingTicket } =
-    useDetailEvent();
-
-  console.log("dataEvent", dataEvent?.location?.address);
+  const {
+    cart,
+    dataEvent,
+    dataTicket,
+    dataTicketInCart,
+    handleAddToCart,
+    handleChangeQuantity,
+    mutateCreateOrder,
+    isPendingCreateOrder,
+  } = useDetailEvent();
 
   return (
     <div className="px-8 md:px-0">
@@ -33,6 +42,11 @@ export default function DetailEvent() {
 
       <section className="mt-8 flex flex-col gap-10 lg:flex-row">
         <div className="w-full lg:w-4/6">
+          <Script
+            src={environment.MIDTRANS_SNAP_URL}
+            data-client-key={environment.MITRANS_CLIENT_KEY}
+            strategy="lazyOnload"
+          />
           <Skeleton isLoaded={!!dataEvent} className="mb-2 h-8 rounded-md">
             <h1 className="mb-2 text-xl font-semibold text-danger">
               {dataEvent?.name}
@@ -97,13 +111,23 @@ export default function DetailEvent() {
                   <DetailEventTicket
                     key={`ticket-${ticket._id}`}
                     ticket={ticket}
+                    cart={cart}
+                    handleAddToCart={() => handleAddToCart(`${ticket._id}`)}
                   />
                 ))}
               </div>
             </Tab>
           </Tabs>
         </div>
-        <div className="w-full lg:w-2/6"></div>
+        <div className="w-full lg:w-2/6">
+          <DetailEventCart
+            cart={cart}
+            dataTicketInCart={dataTicketInCart}
+            onChangeQuantity={handleChangeQuantity}
+            onCreateOrder={mutateCreateOrder}
+            isLoading={isPendingCreateOrder}
+          />
+        </div>
       </section>
     </div>
   );

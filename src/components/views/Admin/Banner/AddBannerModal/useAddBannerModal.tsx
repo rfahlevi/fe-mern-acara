@@ -1,6 +1,7 @@
 import useMediaHandling from "@/hooks/useMediaHandling";
 import bannerServices from "@/services/banner.service";
 import { IBanner } from "@/types/Banner";
+import { CustomError } from "@/types/CustomError";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -72,7 +73,8 @@ const useAddBannerModal = () => {
   } = useMutation({
     mutationFn: addBanner,
     onError: (error) => {
-      toast.error(error.message);
+      const customError = error as CustomError;
+      toast.error(customError.response?.data?.meta?.message ?? error.message);
     },
     onSuccess: () => {
       toast.success("Success add new banner!");

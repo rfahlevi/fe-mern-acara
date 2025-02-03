@@ -58,7 +58,6 @@ const Login = () => {
               render={({ field }) => (
                 <CustomInput
                   {...field}
-                  isRequired
                   type="text"
                   disabled={isPendingLogin}
                   label="Username or Email"
@@ -75,7 +74,6 @@ const Login = () => {
                 <CustomInput
                   {...field}
                   type={isVisible ? "text" : "password"}
-                  isRequired
                   label="Password"
                   disabled={isPendingLogin}
                   placeholder="********"
