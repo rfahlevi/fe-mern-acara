@@ -118,16 +118,6 @@ const DetailTransaction = () => {
             </div>
           </div>
         )}
-        {dataOrder?.status === "pending" && (
-          <Button
-            color="danger"
-            size="sm"
-            className="w-fit"
-            onPress={() => (window as any).snap.pay(dataOrder?.payment?.token)}
-          >
-            Pay Now
-          </Button>
-        )}
       </CardBody>
     </Card>
   );

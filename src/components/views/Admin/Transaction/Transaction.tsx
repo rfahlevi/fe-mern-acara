@@ -64,7 +64,7 @@ export default function Transaction() {
             <DropdownAction
               detailKey="transaction"
               onPressDetail={() =>
-                push(`/member/transactions/${transaction.orderId}`)
+                push(`/admin/transactions/${transaction.orderId}`)
               }
               onPressDelete={() => {
                 setSelectedId(`${transaction.orderId}`);
