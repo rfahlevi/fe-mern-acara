@@ -61,7 +61,7 @@ export default function DetailEvent() {
             </Skeleton>
             <Skeleton isLoaded={!!dataEvent} className="h-5 rounded-md">
               <p className="text-sm">
-                {toConvertTime(dataEvent?.startDate)} -{" "}
+                {toConvertTime(dataEvent?.startDate)} -
                 {toConvertTime(dataEvent?.endDate)}
               </p>
             </Skeleton>
