@@ -11,12 +11,14 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
-      throwOnError: () => {
+      throwOnError: (error) => {
+        onErrorHandler(error);
         return false;
       },
     },
+
     mutations: {
-      onError: onErrorHandler,
+      onError: (error) => onErrorHandler(error),
     },
   },
 });
