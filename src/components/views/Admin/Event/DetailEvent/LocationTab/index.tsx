@@ -1,3 +1,3 @@
-import InfoTab from "./LocationTab";
+import LocationTab from "./LocationTab";
 
-export default InfoTab;
+export default LocationTab;

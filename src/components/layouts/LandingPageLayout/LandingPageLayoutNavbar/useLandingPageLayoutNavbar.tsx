@@ -4,10 +4,18 @@ import authServices from "@/services/auth.service";
 import eventServices from "@/services/event.service";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const useLandingPageLayoutNavbar = () => {
+  const [isReady, setIsReady] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady) {
+      setIsReady(true);
+    }
+  }, [router.isReady]);
+
   const getProfile = async () => {
     const { data } = await authServices.getProfile();
 
@@ -17,13 +25,13 @@ const useLandingPageLayoutNavbar = () => {
   const { data: dataProfile } = useQuery({
     queryKey: ["Profile"],
     queryFn: getProfile,
-    enabled: router.isReady,
+    enabled: isReady,
   });
 
   const [search, setSearch] = useState<string>("");
   const debounce = useDebounce();
   const getEventsSearch = async () => {
-    const params = `limit=${LIMIT_EVENT}&page=${PAGE_DEFAULT}&isPublished=true&search=${search}`;
+    const params = `limit=${LIMIT_EVENT}&page=${PAGE_DEFAULT}&isPublish=true&search=${search}`;
 
     const res = await eventServices.getEvents(params);
     const data = res.data?.data;

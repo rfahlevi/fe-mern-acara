@@ -74,7 +74,7 @@ export default function LocationTab(props: PropTypes) {
       <CardHeader className="flex-col items-center">
         <h1 className="w-full text-xl font-bold">Event Location</h1>
         <p className="w-full text-sm text-default-400">
-          Manager location of this event
+          Manage location of this event
         </p>
       </CardHeader>
       <CardBody>

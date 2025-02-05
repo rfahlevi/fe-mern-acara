@@ -16,7 +16,7 @@ export default function HomeSlider(props: PropTypes) {
 
   return (
     <div className="mx-4 mb-6 h-[30vw] rounded-lg lg:mx-0 lg:h-[20vw]">
-      {!isLoadingBanners ? (
+      {!isLoadingBanners && banners ? (
         <Swiper
           pagination={{
             dynamicBullets: true,

@@ -25,7 +25,7 @@ const useHome = () => {
     enabled: true,
   });
 
-  const eventQuery = `limit=${LIMIT_EVENT}&page=${PAGE_DEFAULT}&isPublished=true`;
+  const eventQuery = `limit=${LIMIT_EVENT}&page=${PAGE_DEFAULT}&isPublish=true`;
 
   const getFeaturedEvents = async (params: string) => {
     const res = await eventServices.getEvents(params);

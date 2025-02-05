@@ -134,12 +134,16 @@ export default function LandingPageLayoutNavbar() {
               <DropdownMenu>
                 <DropdownItem
                   key="dropdown-dashboard"
-                  href="/admin/dashboard"
+                  href="/admin/events"
                   className={cn({ hidden: dataProfile?.role !== "admin" })}
                 >
-                  Dashboard
+                  Admin
                 </DropdownItem>
-                <DropdownItem key="dropdown-profile" href="/member/profile">
+                <DropdownItem
+                  className={cn({ hidden: dataProfile?.role !== "member" })}
+                  key="dropdown-profile"
+                  href="/member/profile"
+                >
                   Profile
                 </DropdownItem>
                 <DropdownItem key="dropdown-signout" onPress={() => signOut()}>
@@ -185,26 +189,25 @@ export default function LandingPageLayoutNavbar() {
           {session.status === "authenticated" ? (
             <Fragment>
               <NavbarMenuItem
-                key="nav-menu-dashboard"
-                className={cn(
-                  "cursor-pointer rounded-lg p-2 text-sm font-medium text-default-700 hover:bg-danger/5 hover:text-danger",
-                  {
-                    hidden: dataProfile?.role !== "admin",
-                  },
-                )}
-              >
-                <Link href="/admin/dashboard" className="flex w-full">
-                  Dashboard
-                </Link>
-              </NavbarMenuItem>
-              <NavbarMenuItem
                 key="nav-menu-profile"
                 className={cn(
                   "cursor-pointer rounded-lg p-2 text-sm font-medium text-default-700 hover:bg-danger/5 hover:text-danger",
+                  { hidden: dataProfile?.role !== "member" },
                 )}
               >
                 <Link href="/member/profile" className="flex w-full">
                   Profile
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem
+                key="nav-menu-admin"
+                className={cn(
+                  "cursor-pointer rounded-lg p-2 text-sm font-medium text-default-700 hover:bg-danger/5 hover:text-danger",
+                  { hidden: dataProfile?.role !== "admin" },
+                )}
+              >
+                <Link href="/admin/events" className="flex w-full">
+                  Admin
                 </Link>
               </NavbarMenuItem>
               <NavbarMenuItem key="nav-menu-logout" className={cn("py-4")}>

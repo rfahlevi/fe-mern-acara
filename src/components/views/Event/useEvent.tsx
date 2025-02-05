@@ -22,7 +22,7 @@ const useEvent = () => {
   }, [router.isReady]);
 
   const getEvents = async () => {
-    let params = `limit=${currentLimit}&page=${currentPage}&category=${currentCategory}&isFeatured=${currentIsFeatured}&isOnline=${currentIsOnline}&isPublished=true`;
+    let params = `limit=${currentLimit}&page=${currentPage}&category=${currentCategory}&isFeatured=${currentIsFeatured}&isOnline=${currentIsOnline}&isPublish=true`;
 
     const res = await eventServices.getEvents(params);
     const data = res?.data;
