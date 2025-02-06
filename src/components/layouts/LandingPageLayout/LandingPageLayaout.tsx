@@ -2,7 +2,6 @@ import PageHead from "@/components/commons/PageHead";
 import { Fragment, ReactNode } from "react";
 import LandingPageLayoutNavbar from "./LandingPageLayoutNavbar";
 import LandingPageLayoutFooter from "./LandingPageLayoutFooter";
-import { useSession } from "next-auth/react";
 
 interface PropTypes {
   children: ReactNode;

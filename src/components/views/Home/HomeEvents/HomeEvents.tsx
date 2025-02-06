@@ -24,7 +24,7 @@ export default function HomeEvents(props: PropTypes) {
         </Link>
       </div>
       <div className="grid auto-cols-[18rem] grid-flow-col gap-6 overflow-x-auto py-2 pb-4 lg:grid-cols-4 lg:px-1">
-        {!isLoading
+        {!isLoading && events
           ? events.map((event) => (
               <CardEvent
                 key={`card-event-${event._id}`}

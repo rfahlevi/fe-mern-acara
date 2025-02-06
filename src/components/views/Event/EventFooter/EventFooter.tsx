@@ -18,6 +18,7 @@ const EventFooter = (props: PropTypes) => {
         size="md"
         selectedKeys={[String(currentLimit)]}
         selectionMode="single"
+        aria-label="Limit"
         onChange={handleChangeLimit}
         startContent={<p className="text-sm">Show: </p>}
         disallowEmptySelection

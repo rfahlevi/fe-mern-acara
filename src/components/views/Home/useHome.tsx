@@ -8,6 +8,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import eventServices from "@/services/event.service";
 import categoryServices from "@/services/category.service";
+import { useRouter } from "next/router";
 
 const useHome = () => {
   const getBanners = async () => {
